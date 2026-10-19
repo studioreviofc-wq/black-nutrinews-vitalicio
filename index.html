@@ -358,6 +358,95 @@
   .expert .sq{z-index:1}
   .expert .sq.front{z-index:4}
 
+  /* ================= DOBRA 2: EXPERT ================= */
+  .about{
+    position:relative;isolation:isolate;overflow:hidden;overflow:clip;
+    padding:120px 0 110px;
+    border-top:1px solid rgba(255,255,255,.06);
+  }
+  .about .bg__base{
+    background:
+      radial-gradient(50% 60% at 22% 55%, rgba(59,130,246,.16), transparent 70%),
+      radial-gradient(40% 50% at 8% 95%, rgba(255,30,30,.18), transparent 70%),
+      radial-gradient(35% 40% at 95% 10%, rgba(255,30,30,.08), transparent 70%),
+      linear-gradient(180deg, #04070F 0%, var(--bg) 30%, #050913 100%);
+  }
+  .about .bg__grid{-webkit-mask-image:radial-gradient(60% 70% at 30% 50%, #000 15%, transparent 80%);mask-image:radial-gradient(60% 70% at 30% 50%, #000 15%, transparent 80%)}
+  .about__grid{
+    display:grid;grid-template-columns:45fr 55fr;gap:56px;align-items:center;
+  }
+
+  /* imagem à esquerda */
+  .about{padding-bottom:0}
+  .about__content{padding:20px 0 110px}
+  .about__media{position:relative;height:min(82vh,760px);min-height:540px;align-self:end}
+  .about__media .expert__stage{inset:0 0 0 -4vw}
+  .about__media .expert__img{height:100%}
+  .about__media .expert__ring{top:48%;width:120%;opacity:.4}
+  .about__media .expert__floor{height:22%}
+  .about__media.no-img .expert__img{display:none}
+  .about__media.no-img .expert__placeholder{display:flex}
+
+  /* texto à direita */
+  .about__content{position:relative;z-index:5}
+  .about__title{
+    font-weight:800;
+    font-size:clamp(28px, 2.7vw, 46px);
+    line-height:1.12;letter-spacing:-.01em;text-transform:uppercase;
+    text-wrap:balance;
+  }
+  .about__title span{color:var(--red);text-shadow:0 0 24px rgba(255,30,30,.35)}
+  .about__title::before{
+    content:"";display:block;width:56px;height:3px;margin-bottom:22px;
+    background:var(--red);box-shadow:0 0 10px var(--red);border-radius:2px;
+  }
+  .about__text{
+    margin-top:22px;max-width:620px;
+    font-weight:400;font-size:17px;line-height:1.7;color:rgba(255,255,255,.72);
+  }
+  .about__text strong{color:#fff;font-weight:600}
+  .about__text .pillars{color:#fff;font-weight:600;border-bottom:2px solid rgba(255,30,30,.6)}
+
+  .stats{
+    margin-top:34px;
+    display:grid;grid-template-columns:repeat(6,1fr);gap:12px;
+    max-width:660px;
+  }
+  .stat{
+    grid-column:span 2;
+    position:relative;
+    padding:18px 18px 16px;border-radius:16px;
+    background:linear-gradient(160deg, rgba(42,47,58,.42), rgba(6,11,23,.4));
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.08);
+    transition:border-color .3s, transform .3s;
+  }
+  .stat:nth-child(n+4){grid-column:span 3}
+  .stat:hover{border-color:rgba(59,130,246,.45);transform:translateY(-2px)}
+  .stat__num{
+    display:block;font-weight:800;font-size:clamp(24px,2vw,32px);line-height:1.1;
+    color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .stat__label{display:block;margin-top:6px;font-weight:500;font-size:13px;line-height:1.4;color:rgba(255,255,255,.6)}
+  .stat--hl{
+    border-color:rgba(255,30,30,.55);
+    box-shadow:0 0 26px rgba(255,30,30,.16), inset 0 0 18px rgba(255,30,30,.06);
+  }
+  .stat--hl .stat__num{color:var(--red);text-shadow:0 0 20px rgba(255,30,30,.35)}
+
+  .about__cta{margin-top:34px;max-width:440px;text-decoration:none}
+
+  /* ================= RODAPÉ ================= */
+  .footer{
+    padding:26px 0;
+    border-top:1px solid rgba(255,30,30,.22);
+    background:#04070F;
+    font-size:12.5px;color:rgba(255,255,255,.5);text-align:center;line-height:1.8;
+  }
+  .footer .sep{margin:0 10px;color:rgba(255,255,255,.2)}
+  .footer a{color:rgba(255,255,255,.7);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
+  .footer a:hover{color:#fff;border-color:var(--red)}
+
   /* ================= ANIMAÇÕES ================= */
   @keyframes pulse{
     0%,100%{box-shadow:0 10px 28px rgba(255,30,30,.28), 0 0 0 1px rgba(255,255,255,.08) inset}
@@ -418,6 +507,26 @@
     .bg__lines i:nth-child(n+2), .bg .sq, .expert .sq.hide-m{display:none}
     .bg__infinity{width:140vw;right:-50vw;top:40%}
     .bg__fade{background:linear-gradient(180deg, rgba(6,11,23,.6), rgba(6,11,23,0) 40%)}
+  }
+  @media (max-width:1024px){
+    .about__grid{gap:32px}
+  }
+  @media (max-width:860px){
+    .about{padding:40px 0 0}
+    .about__grid{grid-template-columns:minmax(0,1fr);gap:0}
+    .about__media{height:min(110vw,480px);min-height:0;margin:0 -16px}
+    .about__media .expert__stage{inset:0}
+    .about__content{margin-top:-40px;padding:0 0 48px}
+    .about__title{font-size:clamp(24px,7vw,30px)}
+    .about__title::before{margin-bottom:16px}
+    .about__text{font-size:15.5px;margin-top:16px}
+    .stats{grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+    .stat,.stat:nth-child(n+4){grid-column:span 1;padding:14px}
+    .stat--hl{grid-column:1 / -1 !important;order:-1}
+    .stat__label{font-size:12px}
+    .about__cta{max-width:none;font-size:14.5px;height:58px}
+    .footer .sep{display:none}
+    .footer span{display:block}
   }
   @media (max-width:380px){
     .badge{font-size:10px;letter-spacing:.03em}
@@ -544,6 +653,74 @@
   </div>
 </main>
 
+<!-- ================= DOBRA 2: EXPERT ================= -->
+<section class="about" aria-labelledby="aboutTitle">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div>
+    <div class="bg__grid"></div>
+    <div class="bg__lines"><i></i><i></i></div>
+    <span class="sq" style="width:44px;height:44px;right:6%;top:12%;--r:10deg;animation-duration:15s"></span>
+    <span class="sq sq--blue" style="width:28px;height:28px;right:40%;bottom:8%;--r:-12deg;animation-duration:13s;animation-delay:-5s"></span>
+  </div>
+
+  <div class="container">
+    <div class="about__grid">
+
+      <!-- Imagem do expert (esquerda) -->
+      <div class="about__media" id="aboutMedia" aria-hidden="true">
+        <div class="expert__stage">
+          <div class="expert__glow"></div>
+          <svg class="expert__ring" viewBox="0 0 200 100">
+            <path d="M100 50 C 82 22, 52 14, 34 24 C 14 35, 14 65, 34 76 C 52 86, 82 78, 100 50 C 118 22, 148 14, 166 24 C 186 35, 186 65, 166 76 C 148 86, 118 78, 100 50 Z" pathLength="288"/>
+            <path class="glow-run" d="M100 50 C 82 22, 52 14, 34 24 C 14 35, 14 65, 34 76 C 52 86, 82 78, 100 50 C 118 22, 148 14, 166 24 C 186 35, 186 65, 166 76 C 148 86, 118 78, 100 50 Z" pathLength="288"/>
+          </svg>
+          <span class="sq sq--red" style="width:96px;height:96px;left:6%;top:14%;--r:-8deg;animation-duration:17s"></span>
+          <span class="sq hide-m" style="width:130px;height:130px;right:4%;top:36%;--r:6deg;animation-duration:19s;animation-delay:-8s"></span>
+          <span class="sq sq--blue front" style="width:52px;height:52px;right:12%;top:68%;--r:14deg;animation-duration:14s;animation-delay:-3s"></span>
+
+          <!-- Substitua "expert-sobre.png" pelo PNG recortado do Davi para esta dobra -->
+          <img class="expert__img" src="expert-sobre.png" alt="" loading="lazy" onerror="document.getElementById('aboutMedia').classList.add('no-img')">
+          <div class="expert__placeholder">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="30" r="18"/><path d="M14 100c0-22 16-38 36-38s36 16 36 38z"/></svg>
+            <span>Imagem do expert<br>(PNG recortado)</span>
+          </div>
+          <div class="expert__floor"></div>
+        </div>
+      </div>
+
+      <!-- Texto (direita) -->
+      <div class="about__content">
+        <h2 class="about__title" id="aboutTitle">O nutricionista que fatura mais de <span>R$ 45 mil por mês</span> só com consultas</h2>
+
+        <p class="about__text">
+          <strong>Davi Trompieri</strong> é nutricionista há 11 anos, fundador da Clínica Evolutio e da Nutri News. Hoje ensina outros nutricionistas a unir os três pilares que fizeram o consultório dele crescer: <span class="pillars">ciência, comunicação e comercial</span>.
+        </p>
+
+        <div class="stats">
+          <div class="stat"><span class="stat__num" data-count="11">11 anos</span><span class="stat__label">de consultório</span></div>
+          <div class="stat"><span class="stat__num" data-count="200">200</span><span class="stat__label">alunos</span></div>
+          <div class="stat stat--hl"><span class="stat__num" data-count="45">+R$ 45 mil</span><span class="stat__label">por mês em consultas</span></div>
+          <div class="stat"><span class="stat__num" data-count="27">27 mil</span><span class="stat__label">seguidores no Instagram</span></div>
+          <div class="stat"><span class="stat__num" data-count="2900">2.900</span><span class="stat__label">nutricionistas nos grupos de WhatsApp</span></div>
+        </div>
+
+        <a class="cta about__cta" href="#leadForm" id="aboutCta">
+          <span>Quero ter acesso à oferta</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="M21 3 14.5 21l-4.5-7-7-4.5z"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= RODAPÉ ================= -->
+<footer class="footer">
+  <div class="container">
+    <span>© 2026 Nutri News</span><span class="sep">|</span><span>Todos os direitos reservados</span><span class="sep">|</span><span>CNPJ [preencher]</span><span class="sep">|</span><span><a href="#">Política de privacidade</a></span>
+  </div>
+</footer>
+
 <script>
   /* ===== CONFIGURAÇÃO ===== */
   const CONFIG = {
@@ -619,6 +796,40 @@
     }catch(err){ /* segue para o grupo mesmo se o webhook falhar */ }
     window.location.href = CONFIG.whatsappGroup;
   });
+
+  /* ===== CTA DA DOBRA 2 → FORMULÁRIO ===== */
+  document.getElementById('aboutCta').addEventListener('click', (e) => {
+    e.preventDefault();
+    form.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(() => document.getElementById('email').focus({preventScroll:true}), 600);
+  });
+
+  /* ===== CONTADORES DOS NÚMEROS ===== */
+  (function(){
+    const fmt = {
+      11:   n => n + ' anos',
+      200:  n => String(n),
+      45:   n => '+R$ ' + n + ' mil',
+      27:   n => n + ' mil',
+      2900: n => n.toLocaleString('pt-BR')
+    };
+    const nums = document.querySelectorAll('[data-count]');
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        const el = entry.target, target = +el.dataset.count, f = fmt[target], t0 = performance.now(), dur = 1400;
+        (function step(t){
+          const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = f(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, {threshold:.6});
+    nums.forEach(n => io.observe(n));
+  })();
 
   /* ===== PROFUNDIDADE SUTIL (desktop) ===== */
   if (window.matchMedia('(pointer:fine) and (min-width:861px)').matches &&
