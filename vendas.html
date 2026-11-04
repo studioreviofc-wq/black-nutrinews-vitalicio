@@ -225,10 +225,16 @@
     font-weight:700;font-size:clamp(20px,1.7vw,26px);line-height:1.3;
     color:var(--blue);text-shadow:0 0 22px rgba(59,130,246,.35);
   }
-  .hero__text{margin-top:34px;max-width:600px;font-size:17px;line-height:1.65;color:var(--muted)}
-  .cta-row{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+  .hero__text{
+    margin-top:34px;max-width:600px;width:fit-content;
+    padding:16px 22px 16px 24px;border-radius:0 12px 12px 0;
+    border-left:3px solid var(--red);
+    background:linear-gradient(90deg, rgba(255,30,30,.12), rgba(59,130,246,.06) 70%, rgba(59,130,246,0));
+    font-size:21px;line-height:1.55;color:rgba(255,255,255,.88);text-wrap:balance;
+  }
+  .cta-row{margin-top:30px;width:fit-content;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
   .cta-row .cta{flex:none}
-  .cta-row .cta-note{margin:0;flex:1 1 170px;max-width:220px;line-height:1.5}
+  .cta-row .cta-note{margin:0;line-height:1.5;text-align:center;text-wrap:balance}
 
   /* expert */
   .expert__stage{
@@ -325,6 +331,11 @@
   .wcard .h2{color:var(--bg);font-size:clamp(26px,2.6vw,42px)}
   .wcard .h2 .r{display:block;text-shadow:none}
   .wcard .lead-text{color:rgba(6,11,23,.72)}
+  .wcard .hl{
+    color:#060B17;font-weight:600;padding:0 3px;border-radius:3px;
+    background:linear-gradient(transparent 58%, rgba(255,30,30,.22) 58%);
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
 
   /* interface de matéria web (só visual: sem veículo, URL, autor ou data reais) */
   .wcard.webnews{padding:0}
@@ -464,7 +475,7 @@
   /* capa 9:16 (aparece no desktop) */
   .course__cover{
     display:none;position:relative;overflow:hidden;
-    aspect-ratio:9/16;border-radius:12px;
+    aspect-ratio:2/3;border-radius:12px;
     background:
       radial-gradient(70% 50% at 80% 100%, rgba(255,30,30,.22), transparent 70%),
       radial-gradient(70% 50% at 10% 0%, rgba(59,130,246,.22), transparent 70%),
@@ -643,7 +654,9 @@
     font-weight:700;font-size:clamp(26px,3vw,44px);line-height:1.2;letter-spacing:-.015em;
   }
   .quote cite{position:relative;display:block;margin-top:20px;font-style:normal;font-size:15px;color:rgba(255,255,255,.65)}
-  .testi{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .testi{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+  .testi-print{margin:0}
+  .testi-print img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 18px 40px -20px rgba(6,11,23,.45)}
   .testi-card{
     position:relative;isolation:isolate;
     padding:26px;border-radius:18px;
@@ -823,7 +836,7 @@
     border-top:1px solid rgba(255,255,255,.09);
     font-size:17px;color:rgba(255,255,255,.5);text-decoration:line-through;text-decoration-color:var(--red)
   }
-  .price__by{margin-top:14px;font-weight:600;font-size:17px;color:rgba(255,255,255,.85)}
+  .price__by{margin-top:34px;padding-top:30px;width:100%;max-width:360px;border-top:1px solid rgba(255,255,255,.09);font-weight:600;font-size:17px;color:rgba(255,255,255,.85)}
   .price__val{
     margin-top:8px;font-weight:700;
     font-size:clamp(52px,5.6vw,80px);line-height:1;letter-spacing:-.03em;
@@ -1032,6 +1045,7 @@
     .support{position:relative;top:0}
     .bonus__grid,.testi{grid-template-columns:1fr 1fr}
     .bonus-card:last-child,.testi-card:last-child{grid-column:1 / -1}
+    .testi-print:last-child{grid-column:auto}
     .problem__top{gap:40px}
     .wcard{padding:56px 48px}
   }
@@ -1068,11 +1082,11 @@
     .intro{max-width:none}
     .sub{font-size:18px;margin-top:14px}
     .pay{margin-top:22px;font-size:19px}
-    .cta-row{flex-direction:column;align-items:stretch;gap:12px;margin-top:24px}
-    .cta-row .cta-note{max-width:none;flex:none}
+    .cta-row{width:auto;flex-direction:column;align-items:stretch;gap:12px;margin-top:24px}
+    .cta-row .cta-note{text-align:center}
     .expert{display:none}
     .lead{margin-top:26px;padding-bottom:40px}
-    .hero__text{margin-top:0;font-size:15.5px}
+    .hero__text{margin-top:0;font-size:18px;padding:14px 16px 14px 18px}
     .cta{max-width:none;font-size:14.5px;height:76px;letter-spacing:.04em}
 
     /* reduzir grafismos */
@@ -1100,7 +1114,7 @@
     .pillar h3{margin-top:0;font-size:20px}
     .pillar p{margin-top:6px;font-size:15px}
 
-    .tally{border-radius:16px;padding:12px 18px;font-size:13px;gap:4px 12px}
+    .tally{border-radius:16px;padding:12px 18px;font-size:13px;gap:4px 12px;text-align:center;line-height:1.5}
     .course summary{padding:20px 18px;gap:14px}
     .plus{width:34px;height:34px}
     .modules{padding:0 14px 16px;grid-template-columns:minmax(0,1fr)}
@@ -1148,7 +1162,7 @@
     }
     .deal .inf--deal{display:none}
     .price{padding:46px 24px 42px}
-    .price__from{margin-top:28px;padding-top:24px}
+    .price__by{margin-top:28px;padding-top:24px}
     .price .cta{margin-top:30px}
     .deal__guar{padding:46px 24px 44px;border-left:0;border-top:2px dashed rgba(255,255,255,.14)}
     .seal{width:140px;height:140px}
@@ -1234,7 +1248,7 @@
         </div>
         <div class="problem__body">
           <p class="lead-text">Hoje o paciente chega ao consultório depois de pedir um cardápio para a IA, de assistir à influenciadora que cortou o carboidrato e de ouvir do colega de trabalho que a caneta emagrecedora resolve tudo sozinha.</p>
-          <p class="lead-text">Informação, ele já tem de sobra. O que ele não encontra em lugar nenhum é alguém que entenda o caso dele, explique o porquê de cada escolha e ajuste a estratégia consulta após consulta.</p>
+          <p class="lead-text">Informação, ele já tem de sobra. <mark class="hl">O que ele não encontra em lugar nenhum</mark> é alguém que entenda o caso dele, explique o porquê de cada escolha e ajuste a estratégia consulta após consulta.</p>
         </div>
       </article>
     </div>
@@ -1276,14 +1290,13 @@
       <p class="lead-text">Aulas curtas e diretas, construídas sobre casos clínicos reais. Você aprende a teoria necessária e, logo em seguida, vê como ela vira conduta na frente do paciente.</p>
     </div>
 
-    <p class="tally reveal"><span>6 cursos</span><i>·</i><span>31 módulos</span><i>·</i><span>Mais de 89 aulas</span></p>
-    <p class="hint">Toque em cada curso para ver todos os módulos e aulas.</p>
+    <p class="tally reveal">Toque em cada curso para ver todos os módulos e aulas.</p>
 
     <div class="acc" id="courses">
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-01.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/01_a_f_rmula_do_atendimento_completo_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 01 · 5 MÓDULOS</span>
             <h3>A Fórmula do Atendimento Completo</h3>
@@ -1302,7 +1315,7 @@
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-02.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/02_set_point_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 02 · 5 MÓDULOS</span>
             <h3>Set Point: a Ciência do Emagrecimento</h3>
@@ -1321,7 +1334,7 @@
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-03.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/03_nutri_o_nos_esportes_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 03 · 4 MÓDULOS</span>
             <h3>Nutrição nos Esportes</h3>
@@ -1339,7 +1352,7 @@
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-04.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/04_nutri_o_e_an_lise_de_exames_de_laborat_rio_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 04 · 6 MÓDULOS</span>
             <h3>Nutrição e Análise de Exames</h3>
@@ -1359,7 +1372,7 @@
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-05.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/05_gerenciando_um_consult_rio_de_sucesso_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 05 · 4 MÓDULOS</span>
             <h3>Nutri Pro</h3>
@@ -1377,7 +1390,7 @@
 
       <details class="course glass glass--lit reveal">
         <summary>
-          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-06.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="course__cover" aria-hidden="true"><span>Capa</span><img src="assets/capas-cursos/06_casos_cl_nicos_reais_1x.webp" alt="" loading="lazy" onerror="this.remove()"></div>
           <div>
             <span class="course__tag">CURSO 06 · 7 MÓDULOS</span>
             <h3>Casos Clínicos</h3>
@@ -1398,7 +1411,7 @@
 
     </div>
 
-    <div class="center"><a class="cta" href="#oferta"><span>Quero os 6 cursos com acesso vitalício</span></a></div>
+    <div class="center"><a class="cta" href="#oferta"><span>Quero meu acesso vitalício</span></a></div>
   </div>
 </section>
 
@@ -1415,25 +1428,22 @@
     </div>
     <div class="bonus__grid">
       <article class="glass glass--lit bonus-card reveal">
-        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <div class="bonus-card__img"><img src="assets/bonus1.webp" alt="Bônus 01" width="800" height="500" loading="lazy"></div>
         <span class="bonus-card__tag">BÔNUS 01</span>
         <h3>Planilha de Cálculo Energético</h3>
         <p>Insira os dados do paciente e tenha o gasto energético calculado em minutos. Menos tempo na calculadora, mais tempo de consulta dedicado a quem está na sua frente.</p>
-        <div class="bonus-card__val">Valor: [R$ ___]</div>
       </article>
       <article class="glass glass--lit bonus-card reveal" style="--d:.1s">
-        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <div class="bonus-card__img"><img src="assets/bonus2.webp" alt="Bônus 02" width="800" height="500" loading="lazy"></div>
         <span class="bonus-card__tag">BÔNUS 02</span>
         <h3>Radar de Pacientes</h3>
         <p>A planilha de acompanhamento comercial do consultório. Veja quem está ativo, quem sumiu e quem ainda não fechou, e saiba exatamente para quem mandar mensagem hoje.</p>
-        <div class="bonus-card__val">Valor: [R$ ___]</div>
       </article>
       <article class="glass glass--lit bonus-card reveal" style="--d:.2s">
-        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <div class="bonus-card__img"><img src="assets/bonus3.webp" alt="Bônus 03" width="800" height="500" loading="lazy"></div>
         <span class="bonus-card__tag">BÔNUS 03</span>
         <h3>Grupo de Casos Clínicos no WhatsApp</h3>
         <p>Leve os pacientes reais do seu consultório e discuta condutas com outros nutricionistas. Decisão difícil deixa de ser uma decisão solitária.</p>
-        <div class="bonus-card__val">Valor: [R$ ___]</div>
       </article>
     </div>
   </div>
@@ -1444,32 +1454,19 @@
   <div class="bg" aria-hidden="true"><div class="bg__base"></div><div class="bg__grid"></div></div>
   <div class="container">
     <div class="sec__head reveal">
-      <h2 class="h2">Mais de 200 nutricionistas já levaram a Nutri News para dentro do consultório.</h2>
-      <p class="lead-text">Não é sobre assistir aulas. É sobre o que muda na segunda-feira seguinte.</p>
+      <h2 class="h2">Mais de <span class="r">200 nutricionistas já levaram a Nutri News</span> para dentro do consultório.</h2>
     </div>
 
     <figure class="quote reveal">
       <svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg>
       <blockquote>“O Nutri News entregou mais do que a minha pós-graduação.”</blockquote>
-      <cite>[Nome do aluno], nutricionista em [cidade]</cite>
+      <cite>Gabriela, Aluna da Nutri News Academy</cite>
     </figure>
 
     <div class="testi">
-      <article class="testi-card reveal">
-        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Nutricionista · [cidade]</div></div></div>
-        <h3>“Passei a calcular a dieta na hora”</h3>
-        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
-      </article>
-      <article class="testi-card reveal" style="--d:.1s">
-        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Nutricionista esportivo · [cidade]</div></div></div>
-        <h3>[Ganho em poucas palavras]</h3>
-        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
-      </article>
-      <article class="testi-card reveal" style="--d:.2s">
-        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Estudante de nutrição · [cidade]</div></div></div>
-        <h3>[Ganho em poucas palavras]</h3>
-        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
-      </article>
+      <figure class="testi-print reveal"><img src="assets/dp01_1x.webp" alt="Depoimento de Patrick, aluno da Nutri News, no WhatsApp" width="431" height="505" loading="lazy"></figure>
+      <figure class="testi-print reveal" style="--d:.1s"><img src="assets/dp02_1x.webp" alt="Depoimento de Rafaela, aluna da Nutri News, no WhatsApp" width="431" height="706" loading="lazy"></figure>
+      <figure class="testi-print reveal" style="--d:.2s"><img src="assets/dp03_1x.webp" alt="Depoimento de nutricionista aluna da Nutri News, no WhatsApp" width="433" height="512" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -1547,7 +1544,6 @@
       <svg class="inf inf--deal" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg>
       <div class="price">
         <img class="price__logo" src="assets/logotipo.svg" alt="Black Nutri News Vitalícia" width="4520" height="1104">
-        <p class="price__from">De [R$ ___]</p>
         <p class="price__by">por [__]x de</p>
         <p class="price__val">R$ [___]</p>
         <p class="price__cash">ou R$ 1.497 à vista · [condição no Pix]</p>
