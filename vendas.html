@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Nutri News Vitalícia</title>
+<meta name="description" content="Tudo o que você precisa para atender com segurança e ter pacientes que voltam e indicam. Pague uma vez. Nunca mais renove.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#FF1E1E;
+    --blue:#3B82F6;
+    --bg:#060B17;
+    --white:#FFFFFF;
+    --glass:#2A2F3A;
+    --muted:rgba(255,255,255,.68);
+    --line:rgba(255,255,255,.08);
+    --bar-h:68px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:92px}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--white);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ul{list-style:none}
+  .defs{position:absolute;width:0;height:0}
+
+  /* ================= BARRA FIXA ================= */
+  .topbar{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    height:var(--bar-h);
+    display:flex;align-items:center;justify-content:center;gap:22px;
+    padding:0 16px;
+    background:linear-gradient(90deg, #B30D0D 0%, #E01616 22%, var(--red) 50%, #E01616 78%, #B30D0D 100%);
+    border-bottom:1px solid rgba(255,255,255,.18);
+    box-shadow:0 6px 30px rgba(255,30,30,.35);
+    overflow:hidden;
+  }
+  .topbar::before{
+    content:"";position:absolute;top:0;bottom:0;width:30%;left:-40%;pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
+    animation:barShine 6s ease-in-out infinite;
+  }
+  .topbar > *{position:relative;z-index:1}
+  .topbar__label{
+    font-weight:700;font-size:17px;letter-spacing:.1em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+    text-shadow:0 1px 2px rgba(0,0,0,.25);
+  }
+  .topbar__label::before{
+    content:"";flex:none;width:8px;height:8px;border-radius:50%;background:#fff;
+    animation:ping 1.6s ease-out infinite;
+  }
+
+  /* ================= BASE DAS SEÇÕES ================= */
+  .container{width:100%;max-width:1320px;margin:0 auto;padding:0 32px}
+  .sec{
+    position:relative;isolation:isolate;overflow:hidden;overflow:clip;
+    padding:120px 0;
+    border-top:1px solid rgba(255,255,255,.05);
+  }
+  .bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+  .bg__base{position:absolute;inset:0}
+  .bg__grid{
+    position:absolute;inset:-60px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(70% 70% at var(--gx,60%) var(--gy,50%), #000 15%, transparent 80%);
+            mask-image:radial-gradient(70% 70% at var(--gx,60%) var(--gy,50%), #000 15%, transparent 80%);
+    opacity:.5;
+    transition:transform .6s ease-out;
+  }
+  .bg__lines{position:absolute;inset:0;overflow:hidden}
+  .bg__lines i{
+    position:absolute;height:1px;left:0;right:0;
+    background:linear-gradient(90deg, transparent, rgba(59,130,246,0) 30%, rgba(59,130,246,.55) 50%, rgba(59,130,246,0) 70%, transparent);
+    background-size:40% 100%;background-repeat:no-repeat;
+    animation:sweep 9s linear infinite;
+    opacity:.7;
+  }
+  .bg__lines i:nth-child(1){top:22%}
+  .bg__lines i:nth-child(2){top:58%;animation-delay:3.5s;
+    background-image:linear-gradient(90deg, transparent, rgba(255,30,30,0) 30%, rgba(255,30,30,.55) 50%, rgba(255,30,30,0) 70%, transparent)}
+  .bg__lines i:nth-child(3){top:84%;animation-delay:6.2s}
+
+  /* infinito */
+  .inf{display:block;fill:none;stroke:var(--red);stroke-linecap:round}
+  .inf .trace{stroke:#fff;stroke-dasharray:22 300;animation:trace 9s linear infinite;opacity:.9}
+  .inf--wm{position:absolute;width:min(1100px,72vw);opacity:.07;stroke-width:1.2;transition:transform .8s ease-out}
+
+
+  /* cartão glass */
+  .glass{
+    position:relative;
+    border-radius:18px;
+    background:linear-gradient(160deg, rgba(42,47,58,.42), rgba(6,11,23,.4));
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .glass--lit::before{
+    content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+    background:linear-gradient(120deg, rgba(255,30,30,.55), transparent 30%, transparent 70%, rgba(59,130,246,.5));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+  }
+
+  /* títulos */
+  .h2{
+    font-weight:700;
+    font-size:clamp(28px, 3vw, 48px);
+    line-height:1.14;letter-spacing:-.015em;
+    text-wrap:balance;
+  }
+  .h2 .r{color:var(--red);text-shadow:0 0 24px rgba(255,30,30,.35)}
+  .lead-text{font-size:18px;line-height:1.7;color:var(--muted);text-wrap:pretty}
+  .sec__head{max-width:860px}
+  .sec__head--c{margin:0 auto;text-align:center}
+  .sec__head .lead-text{margin-top:20px}
+
+  /* CTA — núcleo azul profundo, ponto de luz azul na base, contorno glass fosco
+     e um risco de luz que percorre a borda em saltos suaves */
+  @property --cta-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+  @property --cta-spot{syntax:'<percentage>';inherits:false;initial-value:55%}
+  .cta{
+    --ring:6px;
+    position:relative;
+    width:100%;max-width:465px;
+    height:80px;padding:0 22px;border-radius:16px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    color:var(--white);text-decoration:none;text-align:center;
+    font:700 16px 'Poppins',sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    text-shadow:0 1px 2px rgba(6,11,23,.35);
+    /* contorno glass fosco */
+    border:var(--ring) solid rgba(59,130,246,.16);
+    background:
+      radial-gradient(var(--cta-spot) 120% at 50% 122%, var(--blue) 0%, rgba(59,130,246,.55) 38%, rgba(59,130,246,0) 78%) padding-box,
+      linear-gradient(180deg, #1E40AF 0%, #1D4ED8 100%) padding-box,
+      rgba(59,130,246,.10) border-box;
+    -webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+    animation:ctaPulse 2.8s ease-in-out infinite;
+    transition:transform .2s ease, filter .2s ease;
+  }
+  .cta::before{
+    /* risco fino de luz contornando o botão */
+    content:"";position:absolute;inset:calc(var(--ring) * -1);border-radius:inherit;padding:1.5px;pointer-events:none;
+    background:conic-gradient(from var(--cta-a), transparent 0deg 250deg, rgba(147,197,253,.12) 285deg, rgba(191,219,254,.7) 335deg, rgba(147,197,253,.45) 348deg, transparent 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    filter:drop-shadow(0 0 3px rgba(96,165,250,.5));
+    animation:ctaTrace 3.4s cubic-bezier(.68,-.12,.32,1.12) infinite;
+  }
+  .cta:hover{transform:translateY(-2px);filter:brightness(1.1)}
+  .cta:active{transform:translateY(1px)}
+  .cta--sm{--ring:5px;width:auto;max-width:none;height:50px;padding:0 20px;border-radius:13px;font-size:15px;white-space:nowrap}
+  .cta-note{margin-top:12px;font-size:13px;color:rgba(255,255,255,.55)}
+
+  /* entrada ao rolar */
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;transition-delay:var(--d,0s)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* ================= 1. HERO ================= */
+  .hero{
+    position:relative;isolation:isolate;overflow:hidden;overflow:clip;
+    min-height:100vh;min-height:100svh;
+    padding-top:var(--bar-h);
+  }
+  /* fundo da primeira dobra: imagem com o expert já integrado */
+  .hero{background:var(--bg)}
+  /* o fundo começa abaixo da barra fixa, para a barra não cobrir a cabeça do expert */
+  .hero > .bg{top:var(--bar-h)}
+  .hero .bg__base{
+    background:url('assets/bg_desktop_black_nutrinews_vendas.webp') left top / cover no-repeat var(--bg);
+  }
+  .bg__fade{
+    /* leitura do texto à esquerda + transição suave para a próxima seção */
+    position:absolute;inset:0;
+    background:
+      linear-gradient(90deg, rgba(6,11,23,.92) 0%, rgba(6,11,23,.82) 30%, rgba(6,11,23,.45) 44%, rgba(6,11,23,0) 56%),
+      linear-gradient(180deg, rgba(6,11,23,0) 82%, var(--bg) 100%);
+  }
+  .hero__grid{
+    display:grid;
+    grid-template-columns:55fr 45fr;
+    grid-template-rows:1fr auto auto 1fr;
+    grid-template-areas:
+      ".     expert"
+      "intro expert"
+      "lead  expert"
+      ".     expert";
+    column-gap:24px;
+    min-height:calc(100svh - var(--bar-h));
+  }
+  .intro{grid-area:intro;padding-top:32px;position:relative;z-index:2}
+  .lead{grid-area:lead;padding-bottom:40px;position:relative;z-index:5}
+  .expert{grid-area:expert;position:relative}
+
+  .logo{display:block;height:64px;width:auto;filter:drop-shadow(0 0 14px rgba(255,30,30,.22))}
+
+  /* hierarquia: headline gigante → subtítulo → "Pague uma vez" em destaque → apoio → CTA + aviso lado a lado */
+  .headline{
+    margin-top:30px;
+    font-weight:700;
+    font-size:min(4.2vw, 64px);
+    line-height:1.02;letter-spacing:-.03em;
+  }
+  /* duas linhas fixas: o tamanho acompanha a largura da tela, então nunca quebra no meio */
+  .headline span{display:block;white-space:nowrap}
+  .headline .r{color:var(--red);text-shadow:0 0 28px rgba(255,30,30,.4)}
+  .intro{max-width:630px}
+  .sub{
+    margin-top:22px;
+    font-weight:600;font-size:clamp(18px,1.5vw,23px);line-height:1.38;
+    color:rgba(255,255,255,.94);text-wrap:balance;
+  }
+  .pay{
+    margin-top:42px;
+    font-weight:700;font-size:clamp(20px,1.7vw,26px);line-height:1.3;
+    color:var(--blue);text-shadow:0 0 22px rgba(59,130,246,.35);
+  }
+  .hero__text{margin-top:34px;max-width:600px;font-size:17px;line-height:1.65;color:var(--muted)}
+  .cta-row{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+  .cta-row .cta{flex:none}
+  .cta-row .cta-note{margin:0;flex:1 1 170px;max-width:220px;line-height:1.5}
+
+  /* expert */
+  .expert__stage{
+    position:absolute;inset:0 -6vw 0 0;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .expert__glow{
+    position:absolute;left:50%;bottom:8%;
+    width:78%;aspect-ratio:1;transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(closest-side, rgba(59,130,246,.38), rgba(59,130,246,.10) 55%, transparent 75%);
+    filter:blur(10px);
+  }
+  .expert__glow::after{
+    content:"";position:absolute;inset:25% -10% -20% 40%;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(255,30,30,.35), transparent 75%);
+  }
+  .expert__ring{
+    position:absolute;left:50%;top:44%;
+    width:115%;transform:translate(-50%,-50%);
+    opacity:.5;stroke-width:1.6;
+  }
+  .expert__ring .trace{stroke-width:2.2;filter:drop-shadow(0 0 4px var(--red))}
+  .expert__img{
+    position:relative;z-index:2;
+    height:min(92%, 900px);
+    max-width:100%;
+    object-fit:contain;object-position:bottom center;
+    display:block;
+    filter:
+      drop-shadow(-10px 0 22px rgba(59,130,246,.35))
+      drop-shadow(10px 0 26px rgba(255,30,30,.28))
+      contrast(1.06);
+    -webkit-mask-image:linear-gradient(180deg, #000 78%, transparent 100%);
+            mask-image:linear-gradient(180deg, #000 78%, transparent 100%);
+  }
+  .expert__placeholder{
+    position:relative;z-index:2;
+    width:min(78%, 460px);height:84%;
+    border-radius:220px 220px 0 0;
+    border:1px dashed rgba(255,255,255,.18);
+    border-bottom:0;
+    background:
+      radial-gradient(60% 40% at 50% 28%, rgba(255,255,255,.06), transparent 70%),
+      linear-gradient(180deg, rgba(42,47,58,.25), rgba(6,11,23,0));
+    display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+    color:rgba(255,255,255,.4);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;
+    -webkit-mask-image:linear-gradient(180deg, #000 70%, transparent 100%);
+            mask-image:linear-gradient(180deg, #000 70%, transparent 100%);
+  }
+  .expert__placeholder svg{width:42%;opacity:.35;fill:rgba(255,255,255,.4)}
+  .no-img .expert__img{display:none}
+  .no-img .expert__placeholder{display:flex}
+  .expert__floor{
+    position:absolute;left:0;right:0;bottom:0;height:28%;z-index:3;
+    background:linear-gradient(180deg, transparent, var(--bg) 92%);
+    pointer-events:none;
+  }
+
+  /* ================= 2. PROBLEMA ================= */
+  .problem .bg__base{
+    background:
+      radial-gradient(45% 50% at 90% 15%, rgba(59,130,246,.11), transparent 70%),
+      radial-gradient(40% 50% at 5% 85%, rgba(255,30,30,.12), transparent 70%);
+  }
+  .problem{--gx:30%;--gy:30%}
+  .problem__top{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .problem__body p + p{margin-top:20px}
+
+  /* card branco: contorno em degradê + brilho no hover (sem a luz que segue o mouse) */
+  .wcard{
+    position:relative;isolation:isolate;
+    padding:72px 80px;border-radius:26px;
+    background:linear-gradient(160deg, #FFFFFF 0%, #F4F7FC 100%);
+    border:1px solid rgba(6,11,23,.06);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.55), inset 0 1px 0 #fff;
+    color:var(--bg);
+    transition:transform .45s ease, box-shadow .5s ease;
+  }
+  .wcard > *{position:relative;z-index:1}
+  .wcard::before{
+    /* contorno em degradê vermelho→azul que acende no hover */
+    content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:2;
+    background:linear-gradient(120deg, var(--red), rgba(255,30,30,.35) 35%, rgba(59,130,246,.35) 65%, var(--blue));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .5s ease;
+  }
+  .wcard:hover,.wcard.is-active{
+    transform:translateY(-3px);
+    box-shadow:-24px 26px 70px -24px rgba(255,30,30,.45), 24px 26px 70px -24px rgba(59,130,246,.45), inset 0 1px 0 #fff;
+  }
+  .wcard:hover::before,.wcard.is-active::before{opacity:1}
+  .wcard .h2{color:var(--bg);font-size:clamp(26px,2.6vw,42px)}
+  .wcard .h2 .r{display:block;text-shadow:none}
+  .wcard .lead-text{color:rgba(6,11,23,.72)}
+
+  /* interface de matéria web (só visual: sem veículo, URL, autor ou data reais) */
+  .wcard.webnews{padding:0}
+  .wn-bar{
+    display:flex;align-items:center;gap:18px;
+    padding:14px 22px;border-radius:26px 26px 0 0;
+    background:#EDF1F7;border-bottom:1px solid rgba(6,11,23,.08);
+  }
+  .wn-dots{display:flex;gap:7px;flex:none}
+  .wn-dots i{width:11px;height:11px;border-radius:50%;background:#D3D9E3}
+  .wn-dots i:first-child{background:var(--red)}
+  .wn-dots i:last-child{background:var(--blue)}
+  .wn-url{
+    flex:1;max-width:560px;margin:0 auto;height:34px;padding:0 16px;
+    display:flex;align-items:center;gap:10px;
+    border-radius:999px;background:#fff;border:1px solid rgba(6,11,23,.08);
+  }
+  .wn-url svg{flex:none;width:14px;height:14px;fill:none;stroke:#8A93A3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .wn-url i{height:8px;width:44%;border-radius:4px;background:#E2E7EF}
+  .wn-tools{display:flex;gap:14px;flex:none}
+  .wn-tools svg, .wn-share svg{width:18px;height:18px;fill:none;stroke:#8A93A3;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .wn-body{margin:0 auto;padding:60px 40px 68px;max-width:940px}
+  .webnews .h2{font-size:clamp(28px,3vw,46px);line-height:1.12}
+  .webnews .h2 .r{display:inline}
+  .wn-meta{
+    display:flex;align-items:center;gap:14px;
+    margin-top:28px;padding:16px 0;
+    border-top:1px solid rgba(6,11,23,.1);border-bottom:1px solid rgba(6,11,23,.1);
+  }
+  .wn-avatar{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, rgba(255,30,30,.88), rgba(59,130,246,.88))}
+  .wn-avatar .inf{width:26px;height:13px;stroke:#fff;stroke-width:11}
+  .wn-lines{display:grid;gap:7px}
+  .wn-lines i{display:block;height:8px;width:130px;border-radius:4px;background:#E2E7EF}
+  .wn-lines i + i{width:84px;height:7px}
+  .wn-share{margin-left:auto;display:flex;gap:8px}
+  .wn-share span{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(6,11,23,.1)}
+  .wn-share svg{width:16px;height:16px}
+  .webnews .problem__body{margin-top:30px;max-width:860px}
+  .webnews .problem__body p + p{margin-top:18px}
+  .webnews .problem__body p:first-child{font-size:20px;line-height:1.6;font-weight:500;color:rgba(6,11,23,.86)}
+  .webnews .problem__body p{font-size:17px;line-height:1.75}
+  .problem__turn{margin-top:88px;text-align:center}
+  .problem__turn strong{
+    display:block;font-weight:700;
+    font-size:clamp(28px,3.4vw,54px);line-height:1.1;letter-spacing:-.02em;
+    color:var(--red);text-shadow:0 0 28px rgba(255,30,30,.35);
+  }
+  .problem__turn span{display:block;margin-top:14px;font-weight:600;font-size:clamp(17px,1.5vw,21px);color:rgba(255,255,255,.85)}
+  .pillars{
+    position:relative;
+    margin-top:48px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  /* hover dos pilares: contorno acende em degradê vermelho→azul, luz interna segue o mouse
+     (no mobile, segue a rolagem) e o número ganha preenchimento vermelho */
+  @property --lit-a{syntax:'<color>';inherits:false;initial-value:transparent}
+  @property --lit-b{syntax:'<color>';inherits:false;initial-value:transparent}
+  .pillar{
+    --mx:50%;--my:30%;
+    padding:32px 28px;
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .pillar > *{position:relative;z-index:1}
+  .pillar::before{
+    background:linear-gradient(120deg, rgba(255,30,30,.55), var(--lit-a) 30%, var(--lit-b) 70%, rgba(59,130,246,.5));
+    transition:--lit-a .45s ease, --lit-b .45s ease;
+  }
+  .pillar::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    opacity:0;transition:opacity .45s ease;
+    background:
+      radial-gradient(240px circle at var(--mx) var(--my), rgba(255,255,255,.11), rgba(147,197,253,.06) 42%, transparent 72%),
+      linear-gradient(120deg, rgba(255,30,30,.13), rgba(59,130,246,.13));
+  }
+  .pillar:hover,.pillar.is-active{
+    transform:translateY(-3px);
+    border-color:transparent;
+    box-shadow:-18px 12px 44px -14px rgba(255,30,30,.32), 18px 12px 44px -14px rgba(59,130,246,.32);
+  }
+  .pillar:hover::before,.pillar.is-active::before{--lit-a:rgba(255,30,30,.75);--lit-b:rgba(59,130,246,.75)}
+  .pillar:hover::after,.pillar.is-active::after{opacity:1}
+  .pillar__n{
+    display:block;font-weight:700;font-size:56px;line-height:1;letter-spacing:-.03em;
+    color:transparent;-webkit-text-stroke:1px rgba(255,30,30,.85);
+    transition:color .45s ease, text-shadow .45s ease;
+  }
+  .pillar:hover .pillar__n,.pillar.is-active .pillar__n{color:rgba(255,30,30,.85);text-shadow:0 0 24px rgba(255,30,30,.4)}
+  .pillar h3{margin-top:20px;font-weight:700;font-size:22px;line-height:1.2}
+  .pillar p{margin-top:10px;font-size:15.5px;line-height:1.65;color:var(--muted)}
+
+  /* ================= 3. CURSOS ================= */
+  .courses .bg__base{
+    background:
+      radial-gradient(50% 35% at 50% 0%, rgba(59,130,246,.13), transparent 70%),
+      radial-gradient(40% 30% at 95% 70%, rgba(255,30,30,.10), transparent 70%),
+      #050913;
+  }
+  .courses{--gx:50%;--gy:15%}
+  .tally{
+    margin:40px auto 0;width:fit-content;max-width:100%;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 18px;
+    padding:14px 28px;border-radius:999px;
+    border:1px solid rgba(255,30,30,.6);
+    background:rgba(42,47,58,.42);
+    box-shadow:0 0 22px rgba(255,30,30,.18), inset 0 0 14px rgba(255,30,30,.08);
+    font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .tally i{font-style:normal;color:var(--red)}
+  .hint{margin-top:16px;text-align:center;font-size:14px;color:rgba(255,255,255,.55)}
+  .acc{margin:32px auto 0;max-width:1040px;display:grid;gap:12px}
+  /* hover dos cursos: igual aos pilares (contorno vermelho→azul, luz que segue o mouse, brilho) */
+  .course{
+    --mx:50%;--my:30%;
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .course > *{position:relative;z-index:1}
+  .course::before{
+    background:linear-gradient(120deg, rgba(255,30,30,.55), var(--lit-a) 30%, var(--lit-b) 70%, rgba(59,130,246,.5));
+    transition:--lit-a .45s ease, --lit-b .45s ease;
+  }
+  .course::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+    mix-blend-mode:screen;
+    opacity:0;transition:opacity .45s ease;
+    background:
+      radial-gradient(260px circle at var(--mx) var(--my), rgba(255,255,255,.10), rgba(147,197,253,.06) 42%, transparent 72%),
+      linear-gradient(120deg, rgba(255,30,30,.12), rgba(59,130,246,.12));
+  }
+  .course:hover,.course.is-active{
+    transform:translateY(-3px);
+    border-color:transparent;
+    box-shadow:-18px 12px 44px -14px rgba(255,30,30,.32), 18px 12px 44px -14px rgba(59,130,246,.32);
+  }
+  .course:hover::before,.course.is-active::before{--lit-a:rgba(255,30,30,.75);--lit-b:rgba(59,130,246,.75)}
+  .course:hover::after,.course.is-active::after{opacity:1}
+
+  /* capa 9:16 (aparece no desktop) */
+  .course__cover{
+    display:none;position:relative;overflow:hidden;
+    aspect-ratio:9/16;border-radius:12px;
+    background:
+      radial-gradient(70% 50% at 80% 100%, rgba(255,30,30,.22), transparent 70%),
+      radial-gradient(70% 50% at 10% 0%, rgba(59,130,246,.22), transparent 70%),
+      #0A1222;
+    border:1px solid rgba(255,255,255,.07);
+  }
+  .course__cover span{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,.4);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .course__cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .course:hover .course__cover img,.course.is-active .course__cover img{transform:scale(1.04)}
+
+  /* desktop: 3 linhas × 2 cursos; capa 9:16 à esquerda; módulos abrem em acordeão dentro do card */
+  @media (min-width:861px){
+    .acc{max-width:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+    .acc .course summary{display:flex;align-items:stretch;gap:26px;padding:16px;position:relative}
+    .acc .course__cover{display:block;flex:none;width:180px;align-self:flex-start}
+    .acc .course summary > div:not(.course__cover){flex:1;min-width:0;padding:14px 44px 14px 0;display:flex;flex-direction:column}
+    .acc .course h3{margin-top:10px;font-size:clamp(20px,1.7vw,25px)}
+    .acc .course__desc{margin-top:10px;font-size:15px;line-height:1.65}
+    .acc .course .plus{position:absolute;top:22px;right:20px;width:36px;height:36px}
+    .acc .course:hover .plus,.acc .course.is-active .plus{background:var(--red);border-color:var(--red)}
+    .acc .course .modules{grid-template-columns:repeat(2,minmax(0,1fr));padding:2px 16px 18px;gap:12px}
+  }
+
+  .course[open]{border-color:rgba(255,30,30,.5);box-shadow:0 0 30px rgba(255,30,30,.1)}
+  .course summary{
+    list-style:none;cursor:pointer;
+    display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;
+    padding:24px 28px;border-radius:18px;
+  }
+  .course summary::-webkit-details-marker{display:none}
+  .course summary:focus-visible, .faq summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .course__tag{font-weight:600;font-size:12px;letter-spacing:.14em;color:var(--red)}
+  .course h3{margin-top:6px;font-weight:700;font-size:clamp(19px,1.7vw,24px);line-height:1.25}
+  .course__desc{margin-top:6px;font-size:14.5px;line-height:1.6;color:var(--muted);max-width:760px}
+  .plus{
+    position:relative;flex:none;width:40px;height:40px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.16);background:rgba(6,11,23,.5);
+    transition:transform .3s, background .3s, border-color .3s;
+  }
+  .plus::before,.plus::after{
+    content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;margin:-1px 0 0 -7px;
+    background:#fff;border-radius:2px;
+  }
+  .plus::after{transform:rotate(90deg)}
+  [open] > summary .plus{transform:rotate(45deg);background:var(--red);border-color:var(--red)}
+  .modules{
+    padding:4px 28px 28px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;
+    animation:open .35s ease;
+  }
+  .module{
+    padding:18px;border-radius:12px;
+    background:rgba(6,11,23,.55);
+    border:1px solid rgba(255,255,255,.07);
+  }
+  .module__n{font-weight:600;font-size:11px;letter-spacing:.14em;color:var(--blue)}
+  .module__t{margin-top:4px;font-weight:600;font-size:15px;line-height:1.35}
+  .module ul{margin-top:10px;display:grid;gap:7px}
+  .module li{position:relative;padding-left:16px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+  .module li::before{
+    content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:2px;
+    background:var(--red);box-shadow:0 0 6px rgba(255,30,30,.6);
+  }
+  .center{display:flex;justify-content:center;margin-top:40px}
+
+  /* ================= 4. BÔNUS ================= */
+  .bonus .bg__base{
+    background:
+      radial-gradient(50% 45% at 15% 30%, rgba(255,30,30,.13), transparent 70%),
+      radial-gradient(45% 45% at 90% 80%, rgba(59,130,246,.12), transparent 70%);
+  }
+  .bonus__grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  /* hover dos bônus: igual aos pilares/cursos (contorno vermelho→azul, luz que segue o mouse, brilho) */
+  .bonus-card{
+    --mx:50%;--my:30%;
+    display:flex;flex-direction:column;padding:14px 14px 26px;
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .bonus-card > *{position:relative;z-index:1}
+  .bonus-card::before{
+    background:linear-gradient(120deg, rgba(255,30,30,.55), var(--lit-a) 30%, var(--lit-b) 70%, rgba(59,130,246,.5));
+    transition:--lit-a .45s ease, --lit-b .45s ease;
+  }
+  .bonus-card::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+    mix-blend-mode:screen;
+    opacity:0;transition:opacity .45s ease;
+    background:
+      radial-gradient(260px circle at var(--mx) var(--my), rgba(255,255,255,.10), rgba(147,197,253,.06) 42%, transparent 72%),
+      linear-gradient(120deg, rgba(255,30,30,.12), rgba(59,130,246,.12));
+  }
+  .bonus-card:hover,.bonus-card.is-active{
+    transform:translateY(-3px);
+    border-color:transparent;
+    box-shadow:-18px 12px 44px -14px rgba(255,30,30,.32), 18px 12px 44px -14px rgba(59,130,246,.32);
+  }
+  .bonus-card:hover::before,.bonus-card.is-active::before{--lit-a:rgba(255,30,30,.75);--lit-b:rgba(59,130,246,.75)}
+  .bonus-card:hover::after,.bonus-card.is-active::after{opacity:1}
+  .bonus-card__img .inf{transition:opacity .45s ease, transform .7s ease}
+  .bonus-card:hover .bonus-card__img .inf,.bonus-card.is-active .bonus-card__img .inf{opacity:.45;transform:scale(1.06)}
+  .bonus-card__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .bonus-card:hover .bonus-card__img img,.bonus-card.is-active .bonus-card__img img{transform:scale(1.04)}
+  .bonus-card__img{
+    position:relative;overflow:hidden;
+    aspect-ratio:16/10;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(60% 80% at 80% 100%, rgba(255,30,30,.2), transparent 70%),
+      radial-gradient(60% 80% at 10% 0%, rgba(59,130,246,.2), transparent 70%),
+      #0A1222;
+    border:1px solid rgba(255,255,255,.07);
+    color:rgba(255,255,255,.5);font-size:13px;
+  }
+  .bonus-card__img .inf{position:absolute;width:70%;opacity:.25;stroke-width:1.6}
+  .bonus-card__img span{position:relative}
+  .bonus-card__tag{
+    align-self:flex-start;margin:20px 12px 0;
+    padding:5px 12px;border-radius:999px;
+    background:var(--red);
+    font-weight:700;font-size:11px;letter-spacing:.14em;
+    box-shadow:0 0 16px rgba(255,30,30,.35);
+  }
+  .bonus-card h3{margin:14px 12px 0;font-weight:700;font-size:21px;line-height:1.25}
+  .bonus-card p{margin:10px 12px 0;font-size:15px;line-height:1.65;color:var(--muted);flex:1}
+  .bonus-card__val{
+    margin:18px 12px 0;padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-weight:600;font-size:14px;color:rgba(255,255,255,.75);
+  }
+
+  /* ================= 5. DEPOIMENTOS + BIO ================= */
+  .proof .bg__base{
+    background:
+      radial-gradient(50% 30% at 80% 8%, rgba(59,130,246,.12), transparent 70%),
+      radial-gradient(45% 30% at 10% 75%, rgba(59,130,246,.13), transparent 70%),
+      radial-gradient(35% 25% at 5% 98%, rgba(255,30,30,.15), transparent 70%),
+      #050913;
+  }
+  .proof{--gx:30%;--gy:75%;padding-bottom:0}
+  .proof--bio{border-top:0}
+  .proof--bio .bio{margin-top:0}
+
+  /* depoimentos em versão white (mesma linguagem do card white da seção do problema) */
+  .testis{
+    --gx:50%;--gy:10%;
+    --line:rgba(6,11,23,.05);
+    color:var(--bg);border-top:0;
+  }
+  .testis .bg__base{
+    background:
+      radial-gradient(45% 35% at 85% 5%, rgba(59,130,246,.10), transparent 70%),
+      radial-gradient(40% 35% at 5% 95%, rgba(255,30,30,.08), transparent 70%),
+      linear-gradient(180deg, #FFFFFF 0%, #F4F7FC 100%);
+  }
+  .testis .h2{color:var(--bg)}
+  .testis .lead-text{color:rgba(6,11,23,.68)}
+  .quote{
+    position:relative;overflow:hidden;isolation:isolate;
+    margin-top:48px;padding:52px 56px;border-radius:24px;
+    background:linear-gradient(135deg, #0B1428 0%, var(--bg) 100%);
+    color:#fff;
+    box-shadow:0 30px 70px -30px rgba(6,11,23,.55);
+  }
+  .quote::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;
+    background:linear-gradient(120deg, rgba(255,30,30,.7), transparent 35%, transparent 65%, rgba(59,130,246,.65));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+  }
+  .quote .inf{position:absolute;right:-60px;top:50%;width:520px;margin-top:-130px;opacity:.16;stroke-width:1.4}
+  .quote blockquote{
+    position:relative;max-width:920px;
+    font-weight:700;font-size:clamp(26px,3vw,44px);line-height:1.2;letter-spacing:-.015em;
+  }
+  .quote cite{position:relative;display:block;margin-top:20px;font-style:normal;font-size:15px;color:rgba(255,255,255,.65)}
+  .testi{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .testi-card{
+    position:relative;isolation:isolate;
+    padding:26px;border-radius:18px;
+    background:#fff;
+    border:1px solid rgba(6,11,23,.07);
+    box-shadow:0 14px 40px -18px rgba(6,11,23,.22), inset 0 1px 0 #fff;
+    color:var(--bg);
+    transition:transform .4s ease, box-shadow .45s ease;
+  }
+  .testi-card::before{
+    content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;
+    background:linear-gradient(120deg, var(--red), rgba(255,30,30,.35) 35%, rgba(59,130,246,.35) 65%, var(--blue));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .5s ease;
+  }
+  .testi-card:hover,.testi-card.is-active{
+    transform:translateY(-3px);
+    box-shadow:-18px 20px 50px -22px rgba(255,30,30,.42), 18px 20px 50px -22px rgba(59,130,246,.42), inset 0 1px 0 #fff;
+  }
+  .testi-card:hover::before,.testi-card.is-active::before{opacity:1}
+  .testi-card__who{display:flex;align-items:center;gap:12px}
+  .testi-card__avatar{
+    flex:none;width:48px;height:48px;border-radius:50%;
+    border:1.5px solid rgba(255,30,30,.6);
+    background:radial-gradient(circle at 30% 25%, rgba(59,130,246,.35), #0A1222 70%);
+  }
+  .testi-card__name{font-weight:600;font-size:15px;line-height:1.3;color:var(--bg)}
+  .testi-card__role{font-size:13px;line-height:1.4;color:rgba(6,11,23,.55)}
+  .testi-card h3{margin-top:18px;font-weight:700;font-size:19px;line-height:1.3;color:var(--bg)}
+  .testi-card p{margin-top:8px;font-size:14.5px;line-height:1.6;color:rgba(6,11,23,.68)}
+
+  .bio{
+    margin-top:96px;
+    display:grid;grid-template-columns:45fr 55fr;gap:56px;align-items:center;
+  }
+  .bio__media{position:relative;height:min(82vh,720px);min-height:520px;align-self:end}
+  .bio__media .expert__stage{inset:0 0 0 -4vw}
+  .bio__media .expert__img{height:100%;border-radius:22px;box-shadow:-18px 20px 60px -24px rgba(255,30,30,.35), 18px 20px 60px -24px rgba(59,130,246,.35)}
+  .bio__media .expert__ring{top:48%;width:120%;opacity:.4}
+  .bio__media .expert__floor{height:22%;background:linear-gradient(180deg, transparent, #050913 92%)}
+  .bio__placeholder{
+    position:relative;z-index:2;
+    width:min(82%,460px);aspect-ratio:4/5;max-height:88%;margin-bottom:6%;
+    display:none;align-items:center;justify-content:center;text-align:center;
+    color:rgba(255,255,255,.55);font-size:15px;padding:20px;
+  }
+  .bio__media.no-img .bio__placeholder{display:flex}
+  .bio__media.no-img .expert__img{display:none}
+  .bio__media.no-img .expert__floor{display:none}
+  .bio__content{position:relative;z-index:5;padding:20px 0 120px}
+  .bio__content p{margin-top:20px;font-size:17px;line-height:1.75;color:var(--muted);max-width:640px}
+  .bio__content p strong{color:#fff;font-weight:600}
+  .bio__content p .money{color:var(--red);font-weight:700}
+
+  /* ================= 6. PARA QUEM ================= */
+  .fit .bg__base{background:radial-gradient(40% 50% at 25% 60%, rgba(255,30,30,.12), transparent 70%), radial-gradient(40% 50% at 80% 40%, rgba(59,130,246,.09), transparent 70%)}
+  .fit__grid{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .fit-card{padding:36px}
+  .fit-card h3{font-weight:700;font-size:24px}
+  .fit-card ul{margin-top:22px;display:grid;gap:16px}
+  .fit-card li{position:relative;z-index:1;display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:18px;line-height:1.55}
+  .fit-card li svg{
+    width:26px;height:26px;padding:6px;border-radius:50%;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+    background:#0A101E;border:1.5px solid var(--fc-soft);stroke:var(--fc);
+    transition:background .35s ease, stroke .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  /* tons: verde (é para você) e vermelho (não é para você) */
+  .fit-card{
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .fit-card--yes{
+    --fc:#22C55E;--fc-soft:rgba(34,197,94,.45);--fc-glow:rgba(34,197,94,.5);
+    border-color:rgba(34,197,94,.45);
+    box-shadow:0 0 34px rgba(34,197,94,.10), inset 0 0 22px rgba(34,197,94,.04);
+  }
+  .fit-card--no{
+    --fc:#FF1E1E;--fc-soft:rgba(255,30,30,.45);--fc-glow:rgba(255,30,30,.5);
+    border-color:rgba(255,30,30,.45);
+    box-shadow:0 0 34px rgba(255,30,30,.10), inset 0 0 22px rgba(255,30,30,.04);
+  }
+  .fit-card--no h3{color:rgba(255,255,255,.85)}
+  .fit-card--no li{color:rgba(255,255,255,.7)}
+  .fit-card:hover,.fit-card.is-active{transform:translateY(-3px);border-color:var(--fc-soft);box-shadow:0 18px 50px -16px var(--fc-glow), inset 0 0 26px rgba(255,255,255,.02)}
+
+  /* linha vertical que desce conectando os itens (sobe de volta ao sair) */
+  .fit-card ul{position:relative}
+  .fit-card ul::before,.fit-card ul::after{
+    content:"";position:absolute;left:12px;width:2px;border-radius:2px;
+    top:13px;height:var(--fit-line,calc(100% - 26px));
+  }
+  .fit-card ul::before{background:rgba(255,255,255,.08)}
+  .fit-card ul::after{
+    background:linear-gradient(180deg, var(--fc), var(--fc));
+    box-shadow:0 0 10px var(--fc-glow);
+    transform:scaleY(0);transform-origin:top;
+    transition:transform .6s cubic-bezier(.6,0,.3,1);
+  }
+  .fit-card:hover ul::after,.fit-card.is-active ul::after{transform:scaleY(1);transition:transform 1s linear}
+  .fit-card:hover li svg,.fit-card.is-active li svg{background:var(--fc);border-color:var(--fc);stroke:#fff;box-shadow:0 0 14px var(--fc-glow)}
+  /* ao entrar: cada ícone acende quando a linha chega nele; ao sair: apaga de baixo pra cima
+     (--din/--dout calculados no script "LINHA DOS CARDS PARA QUEM") */
+  .fit-card li svg{transition-delay:var(--dout,0s)}
+  .fit-card:hover li svg,.fit-card.is-active li svg{transition-delay:var(--din,0s)}
+
+  /* ================= 7. OFERTA ================= */
+  /* seção white; oferta + garantia unificadas num único card dark (estilo ticket) */
+  .offer{
+    --gx:50%;--gy:55%;
+    --line:rgba(6,11,23,.05);
+    --offer-bg:#F6F8FC;
+    color:var(--bg);border-top:0;
+  }
+  .offer .bg__base{
+    background:
+      radial-gradient(45% 40% at 50% 70%, rgba(255,30,30,.10), transparent 70%),
+      radial-gradient(50% 40% at 50% 5%, rgba(59,130,246,.10), transparent 70%),
+      var(--offer-bg);
+  }
+  .offer .h2{color:var(--bg)}
+  .offer .lead-text{color:rgba(6,11,23,.68)}
+  /* sombra no wrapper com drop-shadow: ela acompanha o recorte real dos furos do ticket */
+  .deal-wrap{
+    margin:56px auto 0;max-width:1160px;
+    filter:drop-shadow(0 34px 38px rgba(6,11,23,.38)) drop-shadow(0 0 26px rgba(255,30,30,.16));
+  }
+  .deal{
+    --r:16px;--cx:53.5%;--cy:50%;
+    position:relative;isolation:isolate;
+    display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    border-radius:26px;
+    background:
+      radial-gradient(60% 70% at 25% 60%, rgba(255,30,30,.16), transparent 70%),
+      radial-gradient(50% 60% at 85% 40%, rgba(59,130,246,.14), transparent 70%),
+      linear-gradient(160deg, #0B1428 0%, #050913 100%);
+    color:#fff;
+    /* furos reais (transparentes) no topo e na base da divisória */
+    -webkit-mask:
+      radial-gradient(circle at var(--cx) 0, #0000 var(--r), #000 calc(var(--r) + .5px)) top / 100% 51% no-repeat,
+      radial-gradient(circle at var(--cx) 100%, #0000 var(--r), #000 calc(var(--r) + .5px)) bottom / 100% 51% no-repeat;
+            mask:
+      radial-gradient(circle at var(--cx) 0, #0000 var(--r), #000 calc(var(--r) + .5px)) top / 100% 51% no-repeat,
+      radial-gradient(circle at var(--cx) 100%, #0000 var(--r), #000 calc(var(--r) + .5px)) bottom / 100% 51% no-repeat;
+  }
+  /* contorno que continua em volta dos furos */
+  .deal::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+    background:
+      radial-gradient(circle at var(--cx) 0, #0000 var(--r), rgba(255,30,30,.55) calc(var(--r) + .5px), #0000 calc(var(--r) + 2px)),
+      radial-gradient(circle at var(--cx) 100%, #0000 var(--r), rgba(59,130,246,.55) calc(var(--r) + .5px), #0000 calc(var(--r) + 2px));
+  }
+  .deal::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:3;
+    background:linear-gradient(120deg, rgba(255,30,30,.75), rgba(255,30,30,.15) 35%, rgba(59,130,246,.15) 65%, rgba(59,130,246,.7));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+  }
+  .deal .inf--deal{position:absolute;left:50%;top:50%;width:900px;margin:-225px 0 0 -450px;opacity:.07;stroke-width:1.2;z-index:-1}
+  /* diagramação com respiro: logo → preço → condições → CTA, em blocos separados */
+  .price{
+    padding:68px 64px 60px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  /* divisória pontilhada com recortes de ticket entre oferta e garantia */
+  .deal__guar{
+    position:relative;
+    padding:68px 64px 60px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    border-left:2px dashed rgba(255,255,255,.14);
+  }
+  .deal__guar h3{margin-top:36px;font-weight:700;font-size:clamp(26px,2.3vw,34px);line-height:1.15}
+  .deal__guar p{margin-top:16px;font-size:17px;line-height:1.75;color:var(--muted);max-width:400px;text-wrap:pretty}
+  .price__logo{display:block;height:58px;width:auto;max-width:100%;filter:drop-shadow(0 0 14px rgba(255,30,30,.22))}
+  .offer__lead{max-width:600px;margin-left:auto;margin-right:auto;text-wrap:balance}
+  .price__from{
+    margin-top:34px;padding-top:30px;width:100%;max-width:360px;
+    border-top:1px solid rgba(255,255,255,.09);
+    font-size:17px;color:rgba(255,255,255,.5);text-decoration:line-through;text-decoration-color:var(--red)
+  }
+  .price__by{margin-top:14px;font-weight:600;font-size:17px;color:rgba(255,255,255,.85)}
+  .price__val{
+    margin-top:8px;font-weight:700;
+    font-size:clamp(52px,5.6vw,80px);line-height:1;letter-spacing:-.03em;
+    color:var(--red);text-shadow:0 0 34px rgba(255,30,30,.45);
+  }
+  .price__cash{margin-top:16px;font-weight:500;font-size:16px;color:rgba(255,255,255,.9)}
+  .price__incl{
+    margin-top:28px;padding:9px 18px;border-radius:999px;
+    border:1px solid rgba(59,130,246,.45);background:rgba(59,130,246,.1);
+    font-weight:500;font-size:14px;
+  }
+  .price .cta{margin-top:36px;width:100%;max-width:440px}
+  .price .cta-note{margin-top:16px}
+
+  /* ================= 8. GARANTIA (selo, dentro do card da oferta) ================= */
+  .seal{
+    position:relative;width:176px;height:176px;border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    border:2px solid var(--red);
+    background:radial-gradient(circle, rgba(255,30,30,.2), rgba(6,11,23,.5) 72%);
+    box-shadow:0 0 34px rgba(255,30,30,.3), inset 0 0 22px rgba(255,30,30,.14);
+  }
+  .seal::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px dashed rgba(255,255,255,.22);animation:spin 40s linear infinite}
+  .seal b{font-weight:700;font-size:66px;line-height:.95;color:#fff}
+  .seal span{font-weight:700;font-size:10.5px;letter-spacing:.12em;line-height:1.35;margin-top:4px}
+
+  /* ================= 9. FAQ ================= */
+  .faqs .bg__base{background:radial-gradient(35% 45% at 85% 70%, rgba(255,30,30,.09), transparent 70%), #050913}
+  .faqs__grid{margin-top:48px;display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:start}
+  .faq{display:grid;gap:10px}
+  /* perguntas: mesmo hover dos cards dark (contorno vermelho→azul, luz que segue o mouse, brilho) */
+  .faq details{
+    --mx:50%;--my:50%;
+    border-radius:14px;
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .faq details > *{position:relative;z-index:1}
+  .faq details::before{
+    background:linear-gradient(120deg, rgba(255,30,30,.55), var(--lit-a) 30%, var(--lit-b) 70%, rgba(59,130,246,.5));
+    opacity:.55;transition:--lit-a .45s ease, --lit-b .45s ease, opacity .45s ease;
+  }
+  .faq details::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    opacity:0;transition:opacity .45s ease;
+    background:
+      radial-gradient(260px circle at var(--mx) var(--my), rgba(255,255,255,.09), rgba(147,197,253,.05) 42%, transparent 72%),
+      linear-gradient(120deg, rgba(255,30,30,.10), rgba(59,130,246,.10));
+  }
+  .faq details:hover,.faq details.is-active,.faq details[open]{
+    border-color:transparent;
+    box-shadow:-18px 12px 40px -18px rgba(255,30,30,.30), 18px 12px 40px -18px rgba(59,130,246,.30);
+  }
+  .faq details:hover,.faq details.is-active{transform:translateY(-2px)}
+  .faq details:hover::before,.faq details.is-active::before,.faq details[open]::before{opacity:1;--lit-a:rgba(255,30,30,.75);--lit-b:rgba(59,130,246,.75)}
+  .faq details:hover::after,.faq details.is-active::after,.faq details[open]::after{opacity:1}
+  .faq details:hover .plus,.faq details.is-active .plus{border-color:rgba(255,30,30,.7);box-shadow:0 0 14px rgba(255,30,30,.35)}
+  .faq summary{
+    list-style:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:18px 22px;border-radius:14px;
+    font-weight:600;font-size:16px;line-height:1.4;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq .plus{flex:none;width:32px;height:32px;transition:transform .3s ease, background .3s, border-color .3s, box-shadow .3s}
+  .faq .plus::before,.faq .plus::after{width:12px;margin-left:-6px}
+  .faq details > p{padding:0 22px 20px;font-size:15px;line-height:1.7;color:var(--muted);animation:open .3s ease}
+
+  /* card de suporte com cara de WhatsApp */
+  .support{
+    --wa:#25D366;--wa-d:#128C7E;--wa-dd:#075E54;
+    position:sticky;top:96px;overflow:hidden;isolation:isolate;
+    border-radius:20px;
+    background:
+      radial-gradient(80% 60% at 100% 0%, rgba(37,211,102,.16), transparent 70%),
+      linear-gradient(170deg, #0C1A1A 0%, #07110F 55%, #060B17 100%);
+    border:1px solid rgba(37,211,102,.28);
+    box-shadow:0 24px 60px -24px rgba(37,211,102,.35);
+    transition:transform .4s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  .support:hover,.support.is-active{transform:translateY(-3px);border-color:rgba(37,211,102,.55);box-shadow:0 28px 70px -22px rgba(37,211,102,.5)}
+  .wa-head{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 20px;
+    background:linear-gradient(90deg, var(--wa-dd), var(--wa-d));
+  }
+  .wa-avatar{
+    position:relative;flex:none;width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:#fff;
+  }
+  .wa-avatar svg{width:26px;height:26px;fill:var(--wa-d)}
+  .wa-avatar::after{
+    content:"";position:absolute;right:0;bottom:1px;width:11px;height:11px;border-radius:50%;
+    background:var(--wa);border:2px solid var(--wa-dd);
+  }
+  .wa-head b{display:block;font-weight:600;font-size:15px;line-height:1.2}
+  .wa-head small{display:block;margin-top:2px;font-size:12.5px;color:rgba(255,255,255,.75)}
+  .wa-head .wa-ico{margin-left:auto;flex:none;width:24px;height:24px;fill:rgba(255,255,255,.85)}
+  .wa-chat{
+    padding:24px 20px 26px;
+    /* textura sutil de pontos, lembrando o fundo do chat */
+    background-image:radial-gradient(rgba(37,211,102,.07) 1px, transparent 1.2px);
+    background-size:16px 16px;
+  }
+  .wa-bubble{
+    position:relative;max-width:92%;width:fit-content;
+    padding:12px 14px 24px;border-radius:0 14px 14px 14px;
+    background:#1F2C33;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+  }
+  .wa-bubble::before{
+    content:"";position:absolute;left:-8px;top:0;
+    border-top:10px solid #1F2C33;border-left:8px solid transparent;
+  }
+  .wa-bubble + .wa-bubble{margin-top:8px;border-radius:14px}
+  .wa-bubble + .wa-bubble::before{display:none}
+  .wa-bubble h3{font-weight:700;font-size:19px;line-height:1.25;color:#fff}
+  .wa-bubble p{font-size:15px;line-height:1.55;color:rgba(255,255,255,.82)}
+  .wa-time{position:absolute;right:12px;bottom:6px;font-size:11px;color:rgba(255,255,255,.45)}
+  .wa-typing{display:inline-flex;gap:4px;margin-top:10px;padding:10px 14px;border-radius:14px;background:#1F2C33}
+  .wa-typing i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);animation:waDot 1.2s ease-in-out infinite}
+  .wa-typing i:nth-child(2){animation-delay:.15s}
+  .wa-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes waDot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+  .support .cta{margin:0 20px 22px;width:calc(100% - 40px);font-size:14px}
+
+  /* botão WhatsApp: mesmo estilo e efeitos do CTA, no tom do WhatsApp */
+  .cta--wa{
+    border-color:rgba(37,211,102,.18);
+    background:
+      radial-gradient(var(--cta-spot) 120% at 50% 122%, #25D366 0%, rgba(37,211,102,.55) 38%, rgba(37,211,102,0) 78%) padding-box,
+      linear-gradient(180deg, #0B6E4F 0%, #128C7E 100%) padding-box,
+      rgba(37,211,102,.10) border-box;
+    animation-name:ctaPulseWa;
+  }
+  .cta--wa::before{
+    background:conic-gradient(from var(--cta-a), transparent 0deg 250deg, rgba(134,239,172,.12) 285deg, rgba(220,252,231,.75) 335deg, rgba(134,239,172,.45) 348deg, transparent 360deg);
+    filter:drop-shadow(0 0 3px rgba(74,222,128,.55));
+  }
+  .cta--wa svg{flex:none;width:20px;height:20px;fill:#fff}
+  @keyframes ctaPulseWa{
+    0%,100%{--cta-spot:55%;box-shadow:0 8px 24px rgba(18,140,126,.35), 0 0 0 0 rgba(37,211,102,0), inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(134,239,172,.16)}
+    50%{--cta-spot:90%;box-shadow:0 10px 34px rgba(18,140,126,.5), 0 0 30px 6px rgba(37,211,102,.38), inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(134,239,172,.26)}
+  }
+
+  /* ================= 10. FECHAMENTO ================= */
+  .closing{padding:130px 0;text-align:center}
+  .closing .bg__base{
+    background:
+      radial-gradient(50% 70% at 50% 100%, rgba(255,30,30,.28), transparent 70%),
+      radial-gradient(45% 50% at 50% 0%, rgba(59,130,246,.1), transparent 70%),
+      #04070F;
+  }
+  .closing{--gx:50%;--gy:70%}
+  .closing h2{
+    font-weight:700;font-size:clamp(32px,4.6vw,72px);line-height:1.08;letter-spacing:-.025em;
+  }
+  .closing h2 span{display:block}
+  .closing h2 span:last-child{color:var(--red);text-shadow:0 0 30px rgba(255,30,30,.4)}
+  .closing .center{margin-top:44px}
+
+  /* ================= RODAPÉ ================= */
+  .footer{
+    padding:26px 0;
+    border-top:1px solid rgba(255,30,30,.22);
+    background:#04070F;
+    font-size:12.5px;color:rgba(255,255,255,.55);text-align:center;line-height:1.8;
+  }
+
+  /* ================= ANIMAÇÕES ================= */
+  @keyframes ctaPulse{
+    0%,100%{
+      --cta-spot:55%;
+      box-shadow:0 8px 24px rgba(29,78,216,.32), 0 0 0 0 rgba(59,130,246,0), inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(147,197,253,.16);
+    }
+    50%{
+      --cta-spot:90%;
+      box-shadow:0 10px 34px rgba(29,78,216,.45), 0 0 30px 6px rgba(59,130,246,.42), inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(147,197,253,.24);
+    }
+  }
+  @keyframes ctaTrace{to{--cta-a:360deg}}
+  @keyframes float{
+    0%,100%{transform:translate3d(0,0,0) rotate(var(--r,0deg))}
+    50%{transform:translate3d(0,-14px,0) rotate(calc(var(--r,0deg) + 3deg))}
+  }
+  @keyframes sweep{0%{background-position:-60% 0}100%{background-position:160% 0}}
+  @keyframes trace{to{stroke-dashoffset:-288}}
+  @keyframes barShine{0%,55%{left:-40%}100%{left:130%}}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 9px rgba(255,255,255,0)}}
+  @keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .js .reveal{opacity:1;transform:none}
+  }
+
+  /* ================= RESPONSIVO ================= */
+  @media (max-height:860px) and (min-width:861px){
+    .headline{margin-top:22px;font-size:min(3.9vw,58px)}
+    .sub{margin-top:16px}.pay{margin-top:26px}.hero__text{margin-top:20px}.cta-row{margin-top:22px}
+  }
+  @media (max-width:1100px){
+    .faqs__grid{grid-template-columns:1fr}
+    .support{position:relative;top:0}
+    .bonus__grid,.testi{grid-template-columns:1fr 1fr}
+    .bonus-card:last-child,.testi-card:last-child{grid-column:1 / -1}
+    .problem__top{gap:40px}
+    .wcard{padding:56px 48px}
+  }
+  @media (max-width:860px){
+    :root{--bar-h:auto}
+    html{scroll-padding-top:60px}
+    .topbar{position:sticky;height:auto;padding:12px 16px 14px;flex-direction:column;gap:10px;text-align:center;justify-content:center}
+    .topbar__label{display:block;font-size:clamp(15px,4.5vw,18px);letter-spacing:.03em;line-height:1.3;text-align:center}
+    /* bolinha em linha com o texto: acompanha sempre a primeira linha */
+    .topbar__label::before{display:inline-block;vertical-align:middle;margin:-3px 9px 0 0}
+    .topbar .topbar__cta{--ring:5px;height:60px;width:100%;max-width:360px;font-size:15px;letter-spacing:.04em}
+    .container{padding:0 16px}
+    .sec{padding:72px 0}
+    .lead-text{font-size:16px}
+
+    .hero{padding-top:0;min-height:0}
+    .hero .bg__base{background:url('assets/bg_mobile_black_nutrinews_vendas.webp') center top / 100% auto no-repeat var(--bg)}
+    .hero > .bg{top:0}
+    .bg__fade{background:linear-gradient(180deg, rgba(6,11,23,0) 50%, var(--bg) 100%) top / 100% 125vw no-repeat}
+    .headline,.sub,.pay{text-shadow:0 2px 18px rgba(6,11,23,.75)}
+    .hero__grid{
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:auto;
+      grid-template-areas:"intro" "expert" "lead";
+      min-height:0;
+    }
+    /* logo + texto sobem; a H1 passa ao lado do rosto do expert (ele fica à direita na imagem) */
+    .intro{padding-top:22vw}
+    .logo{height:46px}
+    .price__logo{height:44px}
+    .headline{margin-top:10px;font-size:clamp(34px,10.2vw,46px)}
+    .headline span{display:inline;white-space:normal}
+    .headline,.sub,.pay{text-wrap:balance}
+    .intro{max-width:none}
+    .sub{font-size:18px;margin-top:14px}
+    .pay{margin-top:22px;font-size:19px}
+    .cta-row{flex-direction:column;align-items:stretch;gap:12px;margin-top:24px}
+    .cta-row .cta-note{max-width:none;flex:none}
+    .expert{display:none}
+    .lead{margin-top:26px;padding-bottom:40px}
+    .hero__text{margin-top:0;font-size:15.5px}
+    .cta{max-width:none;font-size:14.5px;height:76px;letter-spacing:.04em}
+
+    /* reduzir grafismos */
+    .bg__lines i:nth-child(n+2), .expert__stage .hide-m{display:none}
+    .inf--wm{display:none}
+
+    .problem__top{grid-template-columns:minmax(0,1fr);gap:24px}
+    .wcard{padding:36px 22px;border-radius:20px}
+    .wcard.webnews{padding:0}
+    .wn-bar{padding:12px 14px;gap:12px;border-radius:20px 20px 0 0}
+    .wn-dots i{width:9px;height:9px}
+    .wn-url{height:30px;padding:0 12px}
+    .wn-tools{display:none}
+    .wn-body{padding:32px 22px 36px}
+    .wn-meta{margin-top:22px;padding:14px 0}
+    .wn-lines i{width:100px}
+    .wn-share span{width:32px;height:32px}
+    .webnews .problem__body{margin-top:22px}
+    .webnews .problem__body p:first-child{font-size:17px}
+    .webnews .problem__body p{font-size:15.5px}
+    .problem__turn{margin-top:56px}
+    .pillars{grid-template-columns:minmax(0,1fr);margin-top:32px;gap:12px}
+    .pillar{padding:24px;display:grid;grid-template-columns:62px 1fr;column-gap:14px}
+    .pillar__n{grid-row:span 2;font-size:44px}
+    .pillar h3{margin-top:0;font-size:20px}
+    .pillar p{margin-top:6px;font-size:15px}
+
+    .tally{border-radius:16px;padding:12px 18px;font-size:13px;gap:4px 12px}
+    .course summary{padding:20px 18px;gap:14px}
+    .plus{width:34px;height:34px}
+    .modules{padding:0 14px 16px;grid-template-columns:minmax(0,1fr)}
+    /* capa 9:16 também no mobile, à esquerda do texto */
+    .acc .course summary{display:flex;align-items:flex-start;gap:14px;padding:12px;position:relative}
+    .acc .course__cover{display:block;flex:none;width:104px;border-radius:10px}
+    .acc .course__cover span{font-size:9px;letter-spacing:.1em}
+    .acc .course summary > div:not(.course__cover){flex:1;min-width:0;padding:4px 30px 4px 0}
+    .acc .course__tag{font-size:10.5px;letter-spacing:.1em}
+    .acc .course h3{font-size:17px;margin-top:6px}
+    .acc .course__desc{font-size:13.5px;line-height:1.5}
+    .acc .course .plus{position:absolute;top:14px;right:12px;width:30px;height:30px}
+    .acc .course .plus::before,.acc .course .plus::after{width:11px;margin-left:-5.5px}
+
+    .bonus__grid,.testi{grid-template-columns:minmax(0,1fr);margin-top:12px}
+    .bonus__grid{margin-top:36px}
+    .bonus-card:last-child,.testi-card:last-child{grid-column:auto}
+    .quote{padding:32px 24px;margin-top:32px}
+    .quote .inf{width:320px;right:-80px;margin-top:-80px}
+
+    .bio{grid-template-columns:minmax(0,1fr);gap:0;margin-top:56px}
+    .bio__media{height:min(120vw,500px);min-height:0;margin:0 -16px}
+    .bio__media .expert__stage{inset:0}
+    .bio__content{margin-top:24px;padding:0 0 72px}
+    .bio__content p{font-size:16px}
+
+    .fit__grid{grid-template-columns:minmax(0,1fr);margin-top:32px;gap:12px}
+    .fit-card{padding:24px}
+    .fit-card li{font-size:17px}
+
+    .deal-wrap{margin-top:32px}
+    .deal{grid-template-columns:minmax(0,1fr);border-radius:22px;--r:15px}
+    .deal{
+      -webkit-mask:
+        radial-gradient(circle at 0 var(--cy), #0000 var(--r), #000 calc(var(--r) + .5px)) left / 51% 100% no-repeat,
+        radial-gradient(circle at 100% var(--cy), #0000 var(--r), #000 calc(var(--r) + .5px)) right / 51% 100% no-repeat;
+              mask:
+        radial-gradient(circle at 0 var(--cy), #0000 var(--r), #000 calc(var(--r) + .5px)) left / 51% 100% no-repeat,
+        radial-gradient(circle at 100% var(--cy), #0000 var(--r), #000 calc(var(--r) + .5px)) right / 51% 100% no-repeat;
+    }
+    .deal::after{
+      background:
+        radial-gradient(circle at 0 var(--cy), #0000 var(--r), rgba(255,30,30,.55) calc(var(--r) + .5px), #0000 calc(var(--r) + 2px)),
+        radial-gradient(circle at 100% var(--cy), #0000 var(--r), rgba(59,130,246,.55) calc(var(--r) + .5px), #0000 calc(var(--r) + 2px));
+    }
+    .deal .inf--deal{display:none}
+    .price{padding:46px 24px 42px}
+    .price__from{margin-top:28px;padding-top:24px}
+    .price .cta{margin-top:30px}
+    .deal__guar{padding:46px 24px 44px;border-left:0;border-top:2px dashed rgba(255,255,255,.14)}
+    .seal{width:140px;height:140px}
+    .seal b{font-size:52px}
+    .deal__guar h3{margin-top:20px}
+    .deal__guar p{font-size:15.5px}
+
+    .faqs__grid{margin-top:32px}
+    .faq summary{padding:16px;font-size:15px}
+    .faq details > p{padding:0 16px 18px}
+
+    .closing{padding:88px 0}
+  }
+  </style>
+</head>
+<body>
+
+<svg class="defs" aria-hidden="true">
+  <defs>
+    <path id="inf" pathLength="288" d="M100 50 C 82 22, 52 14, 34 24 C 14 35, 14 65, 34 76 C 52 86, 82 78, 100 50 C 118 22, 148 14, 166 24 C 186 35, 186 65, 166 76 C 148 86, 118 78, 100 50 Z"/>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 13 4.5 4.5L19 7"/></symbol>
+    <symbol id="cross" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= BARRA FIXA ================= -->
+<div class="topbar">
+  <p class="topbar__label">Inscrições abertas para a Nutri News Academy</p>
+  <a class="cta cta--sm topbar__cta" href="#oferta">Quero meu acesso vitalício</a>
+</div>
+
+<!-- ================= 1. HERO ================= -->
+<main class="hero">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div>
+    <div class="bg__fade"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero__grid">
+      <div class="intro">
+        <img class="logo" src="assets/logotipo.svg" alt="Black Nutri News Vitalícia" width="4520" height="1104">
+
+        <h1 class="headline"><span>Da agenda vazia ao</span> <span class="r">consultório cheio</span></h1>
+        <p class="sub">Tudo o que você precisa para atender com segurança e ter pacientes que voltam e indicam.</p>
+        <p class="pay">Pague uma vez. Nunca mais renove.</p>
+      </div>
+
+      <!-- expert está na imagem de fundo; a coluna só reserva o espaço -->
+      <div class="expert" aria-hidden="true"></div>
+
+      <div class="lead">
+        <p class="hero__text">O acervo completo de conhecimento técnico, prático e comercial em nutrição do mercado.</p>
+        <div class="cta-row">
+          <a class="cta" href="#oferta"><span>Quero meu acesso vitalício</span></a>
+          <p class="cta-note">Condição válida somente durante a Black Nutri News.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ================= 2. PROBLEMA ================= -->
+<section class="sec problem">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div><div class="bg__grid"></div>
+    <div class="bg__lines"><i></i></div>
+  </div>
+  <div class="container">
+    <div class="wcard webnews reveal">
+      <div class="wn-bar" aria-hidden="true">
+        <span class="wn-dots"><i></i><i></i><i></i></span>
+        <span class="wn-url"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><i></i></span>
+        <span class="wn-tools"><svg viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></span>
+      </div>
+      <article class="wn-body">
+        <h2 class="h2">Nunca foi tão fácil conseguir uma dieta. <span class="r">E nunca foi tão valioso ser nutricionista.</span></h2>
+        <div class="wn-meta" aria-hidden="true">
+          <span class="wn-avatar"><svg class="inf" viewBox="0 0 200 100"><use href="#inf"/></svg></span>
+          <span class="wn-lines"><i></i><i></i></span>
+          <span class="wn-share"><span><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></svg></span></span>
+        </div>
+        <div class="problem__body">
+          <p class="lead-text">Hoje o paciente chega ao consultório depois de pedir um cardápio para a IA, de assistir à influenciadora que cortou o carboidrato e de ouvir do colega de trabalho que a caneta emagrecedora resolve tudo sozinha.</p>
+          <p class="lead-text">Informação, ele já tem de sobra. O que ele não encontra em lugar nenhum é alguém que entenda o caso dele, explique o porquê de cada escolha e ajuste a estratégia consulta após consulta.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="problem__turn reveal">
+      <strong>Isso é trabalho de nutricionista.</strong>
+      <span>Mas só do nutricionista que une três coisas:</span>
+    </div>
+
+    <div class="pillars">
+      <article class="glass glass--lit pillar reveal">
+        <span class="pillar__n">01</span>
+        <h3>Técnica de verdade</h3>
+        <p>Para calcular, ajustar e evoluir a dieta com segurança, em qualquer perfil de paciente.</p>
+      </article>
+      <article class="glass glass--lit pillar reveal" style="--d:.1s">
+        <span class="pillar__n">02</span>
+        <h3>Comunicação</h3>
+        <p>Para gerar adesão, lidar com o paciente desmotivado e transformar orientação em mudança de comportamento.</p>
+      </article>
+      <article class="glass glass--lit pillar reveal" style="--d:.2s">
+        <span class="pillar__n">03</span>
+        <h3>Comercial</h3>
+        <p>Para que o paciente volte, indique e continue pagando novas consultas ao longo do ano.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. CURSOS ================= -->
+<section class="sec courses">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div><div class="bg__grid"></div>
+    <div class="bg__lines"><i></i><i></i><i></i></div>
+  </div>
+  <div class="container">
+    <div class="sec__head sec__head--c reveal">
+      <h2 class="h2">Por que a Nutri News Academy é o <span class="r">único investimento</span> que você precisa?</h2>
+      <p class="lead-text">Aulas curtas e diretas, construídas sobre casos clínicos reais. Você aprende a teoria necessária e, logo em seguida, vê como ela vira conduta na frente do paciente.</p>
+    </div>
+
+    <p class="tally reveal"><span>6 cursos</span><i>·</i><span>31 módulos</span><i>·</i><span>Mais de 89 aulas</span></p>
+    <p class="hint">Toque em cada curso para ver todos os módulos e aulas.</p>
+
+    <div class="acc" id="courses">
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-01.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 01 · 5 MÓDULOS</span>
+            <h3>A Fórmula do Atendimento Completo</h3>
+            <p class="course__desc">Estrutura da consulta, dieta na hora e por equivalentes, ciclo de carboidratos, refeed, comunicação não violenta e educação nutricional.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Estrutura da consulta</p><ul><li>Anamnese completa</li><li>Avaliação de composição corporal</li><li>Educação nutricional</li><li>Aprendendo a traçar metas</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Cálculos nutricionais</p><ul><li>Calculando o gasto energético</li><li>Ajustando a composição de macronutrientes</li><li>Calculando a dieta na hora</li><li>Evoluindo a dieta</li><li>Calculando a dieta na hora por equivalentes</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Estratégias nutricionais avançadas</p><ul><li>Introdução ao ciclo de carboidratos</li><li>Ciclo de carbo 4x3</li><li>Refeed de 2 dias</li><li>Refeed de 2 semanas</li><li>Ciclo de carboidrato de acordo com o treino</li><li>Sleep low, train low</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Comunicação estratégica</p><ul><li>O que é a comunicação não violenta</li><li>Perguntando do jeito certo</li><li>Escuta ativa, a arte de escutar</li><li>Observar sem julgar</li><li>Como desenvolver empatia</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 5</p><p class="module__t">Educação nutricional</p><ul><li>Explicando o processo de hipertrofia para o paciente</li><li>Como orientar sobre o consumo de carboidrato</li><li>Como orientar sobre o consumo de gordura</li><li>Como explicar o processo de mudança de estilo de vida</li><li>Como explicar sobre refeições fora do plano</li></ul></div>
+        </div>
+      </details>
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-02.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 02 · 5 MÓDULOS</span>
+            <h3>Set Point: a Ciência do Emagrecimento</h3>
+            <p class="course__desc">Neurociência do apetite, inibidores de apetite, nutrição comportamental, platô, recomposição corporal e as 4 fases da definição.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Neurociência e emagrecimento</p><ul><li>O sistema neurológico de regulação do apetite</li><li>O hipotálamo e o controle metabólico</li><li>Dopamina, sistema de recompensa e desejo por comida</li><li>Regulando comportamentos e atingindo metas</li><li>Medicamentos inibidores de apetite</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Nutrição comportamental</p><ul><li>Terapia cognitivo-comportamental</li><li>Como trabalhar com pacientes desmotivados</li><li>Como traçar metas que geram resultados</li><li>Automonitoramento de rotina</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Fisiologia do emagrecimento</p><ul><li>Sistema de regulação do peso corporal</li><li>O papel dos hormônios no emagrecimento</li><li>Fisiologia da obesidade</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Estratégias nutricionais</p><ul><li>Identificando o platô do seu paciente</li><li>Como driblar o metabolismo lento</li><li>Recomposição corporal</li><li>Definição muscular em pacientes atléticos</li><li>Treinamento de força aliado à dieta</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 5</p><p class="module__t">Os 4 pilares da definição muscular</p><ul><li>Fases da definição muscular</li><li>Fase 1: mudança de comportamento</li><li>Fase 2: iniciando a restrição calórica</li><li>Fase 3: partindo para o processo de hipertrofia</li><li>Fase 4: retornando para a restrição calórica</li><li>Caso clínico: as 4 fases na prática</li></ul></div>
+        </div>
+      </details>
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-03.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 03 · 4 MÓDULOS</span>
+            <h3>Nutrição nos Esportes</h3>
+            <p class="course__desc">Corredores, triatletas, esportes de luta e crossfit: gasto energético, periodização, hidratação e suplementação.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Nutrição para corredores</p><ul><li>Tipos de corredores</li><li>Fisiologia e metabolismo da corrida</li><li>Periodização nutricional na corrida</li><li>A supercompensação de glicogênio</li><li>Calculando o gasto energético de corredores</li><li>Ajustando a composição de macronutrientes</li><li>Hidratação e intratreino</li><li>Suplementos para corredores</li><li>Dieta carnívora e dieta cetogênica</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Triathlon</p><ul><li>Tipos de provas e atletas</li><li>Periodização nutricional no triathlon</li><li>Calculando o gasto energético de triatletas</li><li>Hidratação e intratreino</li><li>Suplementos para triatletas</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Nutrição nos esportes de luta</p><ul><li>Tipos de esportes de luta e fisiologia</li><li>Calculando o gasto energético de lutadores</li><li>Ajustando a composição de macronutrientes</li><li>Desidratação para bater o peso</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Nutrição no crossfit</p><ul><li>Fisiologia do crossfit</li><li>Calculando o gasto energético no crossfit</li><li>Ajustando a composição de macronutrientes</li><li>Suplementos no crossfit</li><li>Preparando o atleta para o dia da prova</li></ul></div>
+        </div>
+      </details>
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-04.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 04 · 6 MÓDULOS</span>
+            <h3>Nutrição e Análise de Exames</h3>
+            <p class="course__desc">Prescrição, hemograma e ferro, glicemia, perfil lipídico, tireoide e exames no esporte com Rodrigo Manda.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Prescrevendo exames na prática</p><ul><li>Como realizar a prescrição de exames laboratoriais</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Exames no esporte</p><ul><li>Análise de exames laboratoriais no esporte, com Rodrigo Manda</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Hemograma e ferro</p><ul><li>Como avaliar o hemograma</li><li>Como avaliar exames de ferro e ferritina</li><li>Como avaliar os diferentes tipos de anemia</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Glicemia e diabetes</p><ul><li>Como avaliar o perfil glicídico do seu paciente</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 5</p><p class="module__t">Colesterol e lipídios</p><ul><li>Como interpretar o perfil lipídico dos seus pacientes</li><li>A importância da homocisteína nos exames</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 6</p><p class="module__t">Tireoide</p><ul><li>Como avaliar hipotireoidismo e hipertireoidismo</li></ul></div>
+        </div>
+      </details>
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-05.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 05 · 4 MÓDULOS</span>
+            <h3>Nutri Pro</h3>
+            <p class="course__desc">Método de consulta, gestão comercial com ativos, inativos e leads, follow-up e marketing para nutricionistas.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Método de consulta</p><ul><li>Introdução ao método de consulta</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Operacional</p><ul><li>Método de atendimento</li><li>Espírito da consulta</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Gestão comercial</p><ul><li>Introdução ao comercial</li><li>Trabalhando com clientes ativos</li><li>Trabalhando com clientes inativos</li><li>Trabalhando com leads</li><li>Régua de relacionamento e follow-up</li></ul></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Marketing para nutricionistas</p><ul><li>Produção de conteúdo, Instagram e tráfego</li></ul></div>
+        </div>
+      </details>
+
+      <details class="course glass glass--lit reveal">
+        <summary>
+          <div class="course__cover" aria-hidden="true"><span>Capa 9:16</span><img src="assets/capa-curso-06.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div>
+            <span class="course__tag">CURSO 06 · 7 MÓDULOS</span>
+            <h3>Casos Clínicos</h3>
+            <p class="course__desc">7 módulos de casos reais do consultório, para ver a teoria virar conduta.</p>
+          </div>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <div class="modules">
+          <div class="module"><p class="module__n">MÓDULO 1</p><p class="module__t">Casos clínicos: emagrecimento</p></div>
+          <div class="module"><p class="module__n">MÓDULO 2</p><p class="module__t">Casos clínicos: hipertrofia</p></div>
+          <div class="module"><p class="module__n">MÓDULO 3</p><p class="module__t">Casos clínicos: definição muscular</p></div>
+          <div class="module"><p class="module__n">MÓDULO 4</p><p class="module__t">Casos clínicos: corredores</p></div>
+          <div class="module"><p class="module__n">MÓDULO 5</p><p class="module__t">Casos clínicos: triatletas</p></div>
+          <div class="module"><p class="module__n">MÓDULO 6</p><p class="module__t">Casos clínicos: doenças intestinais</p></div>
+          <div class="module"><p class="module__n">MÓDULO 7</p><p class="module__t">Casos clínicos: doenças crônicas (diabetes e alterações no lipidograma)</p></div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="center"><a class="cta" href="#oferta"><span>Quero os 6 cursos com acesso vitalício</span></a></div>
+  </div>
+</section>
+
+<!-- ================= 4. BÔNUS ================= -->
+<section class="sec bonus">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div><div class="bg__grid"></div>
+    <div class="bg__lines"><i></i><i></i></div>
+  </div>
+  <div class="container">
+    <div class="sec__head reveal">
+      <h2 class="h2">Só quem entrar na Black leva também <span class="r">estes 3 bônus.</span></h2>
+      <p class="lead-text">Eles não fazem parte da oferta regular da Nutri News Academy.</p>
+    </div>
+    <div class="bonus__grid">
+      <article class="glass glass--lit bonus-card reveal">
+        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <span class="bonus-card__tag">BÔNUS 01</span>
+        <h3>Planilha de Cálculo Energético</h3>
+        <p>Insira os dados do paciente e tenha o gasto energético calculado em minutos. Menos tempo na calculadora, mais tempo de consulta dedicado a quem está na sua frente.</p>
+        <div class="bonus-card__val">Valor: [R$ ___]</div>
+      </article>
+      <article class="glass glass--lit bonus-card reveal" style="--d:.1s">
+        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <span class="bonus-card__tag">BÔNUS 02</span>
+        <h3>Radar de Pacientes</h3>
+        <p>A planilha de acompanhamento comercial do consultório. Veja quem está ativo, quem sumiu e quem ainda não fechou, e saiba exatamente para quem mandar mensagem hoje.</p>
+        <div class="bonus-card__val">Valor: [R$ ___]</div>
+      </article>
+      <article class="glass glass--lit bonus-card reveal" style="--d:.2s">
+        <div class="bonus-card__img"><svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg><span>[Imagem do bônus]</span></div>
+        <span class="bonus-card__tag">BÔNUS 03</span>
+        <h3>Grupo de Casos Clínicos no WhatsApp</h3>
+        <p>Leve os pacientes reais do seu consultório e discuta condutas com outros nutricionistas. Decisão difícil deixa de ser uma decisão solitária.</p>
+        <div class="bonus-card__val">Valor: [R$ ___]</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. DEPOIMENTOS (white) ================= -->
+<section class="sec testis">
+  <div class="bg" aria-hidden="true"><div class="bg__base"></div><div class="bg__grid"></div></div>
+  <div class="container">
+    <div class="sec__head reveal">
+      <h2 class="h2">Mais de 200 nutricionistas já levaram a Nutri News para dentro do consultório.</h2>
+      <p class="lead-text">Não é sobre assistir aulas. É sobre o que muda na segunda-feira seguinte.</p>
+    </div>
+
+    <figure class="quote reveal">
+      <svg class="inf" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg>
+      <blockquote>“O Nutri News entregou mais do que a minha pós-graduação.”</blockquote>
+      <cite>[Nome do aluno], nutricionista em [cidade]</cite>
+    </figure>
+
+    <div class="testi">
+      <article class="testi-card reveal">
+        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Nutricionista · [cidade]</div></div></div>
+        <h3>“Passei a calcular a dieta na hora”</h3>
+        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
+      </article>
+      <article class="testi-card reveal" style="--d:.1s">
+        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Nutricionista esportivo · [cidade]</div></div></div>
+        <h3>[Ganho em poucas palavras]</h3>
+        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
+      </article>
+      <article class="testi-card reveal" style="--d:.2s">
+        <div class="testi-card__who"><span class="testi-card__avatar" aria-hidden="true"></span><div><div class="testi-card__name">[Nome do aluno]</div><div class="testi-card__role">Estudante de nutrição · [cidade]</div></div></div>
+        <h3>[Ganho em poucas palavras]</h3>
+        <p>[Antes: como era a rotina. Depois: o que mudou, com número sempre que possível.]</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5b. DAVI ================= -->
+<section class="sec proof proof--bio">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div><div class="bg__grid"></div>
+    <div class="bg__lines"><i></i></div>
+  </div>
+  <div class="container">
+    <div class="bio">
+      <div class="bio__media" id="bioMedia" aria-hidden="true">
+        <div class="expert__stage">
+          <div class="expert__glow"></div>
+          <svg class="inf expert__ring" viewBox="0 0 200 100"><use href="#inf"/><use class="trace" href="#inf"/></svg>
+
+          <!-- Foto do Davi (assets/expert-biografia.webp) -->
+          <img class="expert__img" src="assets/expert-biografia.webp" alt="" loading="lazy" onerror="document.getElementById('bioMedia').classList.add('no-img')">
+          <div class="glass glass--lit bio__placeholder">[Foto do Davi no consultório]</div>
+          <div class="expert__floor"></div>
+        </div>
+      </div>
+      <div class="bio__content reveal">
+        <h2 class="h2">Eu já calculei dietas na sala da casa dos meus pacientes.</h2>
+        <p><strong>Sou o Davi Trompieri</strong>, nutricionista há 11 anos. Comecei em 2015 atendendo na casa dos pacientes, porque não tinha condições de ter um consultório. Depois entrei em uma das maiores clínicas da cidade, montava dietas que davam resultado e, mesmo assim, não passava de R$ 5 mil por mês.</p>
+        <p>A virada veio quando uni a técnica à comunicação e ao comportamento. Em 2018 fiz meus primeiros R$ 10 mil e logo me tornei o primeiro nutricionista a ter uma sala exclusiva na clínica.</p>
+        <p>Em 2020 abri a Clínica Evolutio e fui fundo em comercial e marketing. Hoje faturo <span class="money">mais de R$ 45 mil por mês</span> com consultas e, como fundador da Nutri News Academy, já ensinei esse caminho a 200 alunos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. PARA QUEM ================= -->
+<section class="sec fit">
+  <div class="bg" aria-hidden="true"><div class="bg__base"></div><div class="bg__grid"></div></div>
+  <div class="container">
+    <div class="sec__head sec__head--c reveal">
+      <h2 class="h2">A Nutri News Academy não é para todo mundo. <span class="r">E isso é proposital.</span></h2>
+    </div>
+    <div class="fit__grid">
+      <div class="glass fit-card fit-card--yes reveal">
+        <h3>É para você que</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#check"/></svg><span>Quer viver de consultório e ser referência para seus pacientes.</span></li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg><span>Quer atender qualquer paciente com segurança, sem travar na hora de montar a dieta.</span></li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg><span>Quer ver a agenda cheia de pacientes que voltam e indicam.</span></li>
+          <li><svg aria-hidden="true"><use href="#check"/></svg><span>Quer ser reconhecido pelos resultados que entrega e cobrar o que o seu trabalho vale.</span></li>
+        </ul>
+      </div>
+      <div class="glass fit-card fit-card--no reveal" style="--d:.1s">
+        <h3>Não é para você que</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#cross"/></svg><span>Não tem o objetivo de crescer como nutricionista.</span></li>
+          <li><svg aria-hidden="true"><use href="#cross"/></svg><span>Quer resultado sem esforço, sem estudar e sem aplicar.</span></li>
+          <li><svg aria-hidden="true"><use href="#cross"/></svg><span>Procura um atalho ou uma fórmula mágica.</span></li>
+          <li><svg aria-hidden="true"><use href="#cross"/></svg><span>Prefere continuar fazendo tudo igual e esperar um resultado diferente.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. OFERTA ================= -->
+<section class="sec offer" id="oferta">
+  <div class="bg" aria-hidden="true"><div class="bg__base"></div><div class="bg__grid"></div></div>
+  <div class="container">
+    <div class="sec__head sec__head--c reveal">
+      <h2 class="h2">Vamos fazer uma <span class="r">conta honesta?</span></h2>
+      <p class="lead-text offer__lead">Na Nutri News Academy, você paga uma única vez e garante tudo o que precisa para a sua carreira inteira.</p>
+    </div>
+
+    <!-- oferta + garantia (8) unificadas no mesmo card -->
+    <div class="deal-wrap reveal"><div class="deal" id="deal">
+      <svg class="inf inf--deal" viewBox="0 0 200 100" aria-hidden="true"><use href="#inf"/></svg>
+      <div class="price">
+        <img class="price__logo" src="assets/logotipo.svg" alt="Black Nutri News Vitalícia" width="4520" height="1104">
+        <p class="price__from">De [R$ ___]</p>
+        <p class="price__by">por [__]x de</p>
+        <p class="price__val">R$ [___]</p>
+        <p class="price__cash">ou R$ 1.497 à vista · [condição no Pix]</p>
+        <p class="price__incl">Acesso vitalício · 3 bônus exclusivos</p>
+        <a class="cta" href="#oferta" data-link="checkout"><span>Garantir meu acesso vitalício</span></a>
+        <p class="cta-note">Pagamento único. Sem renovação.</p>
+      </div>
+      <div class="deal__guar">
+        <div class="seal"><b>7</b><span>DIAS DE<br>GARANTIA</span></div>
+        <h3>Risco zero para você.</h3>
+        <p>Entre, assista às aulas, use as planilhas e conheça a plataforma por dentro. Se em até 7 dias você sentir que não é para você, devolvemos 100% do valor. Simples assim.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= 9. FAQ ================= -->
+<section class="sec faqs">
+  <div class="bg" aria-hidden="true"><div class="bg__base"></div><div class="bg__grid"></div></div>
+  <div class="container">
+    <h2 class="h2 reveal">Ainda tem alguma dúvida?</h2>
+    <div class="faqs__grid">
+      <div class="faq reveal" id="faq">
+        <details class="glass glass--lit"><summary>O acesso é vitalício mesmo?<span class="plus" aria-hidden="true"></span></summary><p>Sim. Você paga uma vez e a Nutri News Academy fica com você, sem mensalidade e sem renovação.</p></details>
+        <details class="glass glass--lit"><summary>Sou estudante. Serve para mim?<span class="plus" aria-hidden="true"></span></summary><p>Serve. Você chega ao primeiro atendimento sabendo estruturar a consulta, calcular a dieta e conduzir o paciente.</p></details>
+        <details class="glass glass--lit"><summary>Tem conteúdo de suplementação?<span class="plus" aria-hidden="true"></span></summary><p>A suplementação é abordada nos módulos de esporte: corredores, triatletas e crossfit, sempre aplicada ao contexto de cada modalidade.</p></details>
+        <details class="glass glass--lit"><summary>Vou ter acesso a casos clínicos?<span class="plus" aria-hidden="true"></span></summary><p>Sim. São 7 módulos só de casos clínicos. E quem entrar na Black ainda leva, como bônus, o grupo de casos clínicos no WhatsApp para discutir os seus.</p></details>
+        <details class="glass glass--lit"><summary>Vou aprender a analisar exames?<span class="plus" aria-hidden="true"></span></summary><p>Sim. O curso de Análise de Exames cobre hemograma, ferro, glicemia, perfil lipídico, tireoide e exames no esporte.</p></details>
+        <details class="glass glass--lit"><summary>Tem conteúdo para aumentar a captação de pacientes?<span class="plus" aria-hidden="true"></span></summary><p>Sim. O Nutri Pro é dedicado a isso: gestão comercial, follow-up, reativação de pacientes e marketing para nutricionistas.</p></details>
+        <details class="glass glass--lit"><summary>Já fiz pós-graduação. Ainda vale a pena?<span class="plus" aria-hidden="true"></span></summary><p>Uma das frases que mais ouvimos dos alunos é: “O Nutri News entregou mais do que a minha pós-graduação.” O foco aqui é a prática do consultório.</p></details>
+        <details class="glass glass--lit"><summary>Quais as formas de pagamento?<span class="plus" aria-hidden="true"></span></summary><p>[Cartão em até __x · Pix · boleto]</p></details>
+      </div>
+      <aside class="support reveal" id="suporte">
+        <div class="wa-head">
+          <span class="wa-avatar" aria-hidden="true"><svg><use href="#wa"/></svg></span>
+          <div><b>Suporte Nutri News</b><small>online agora</small></div>
+          <svg class="wa-ico" aria-hidden="true"><use href="#wa"/></svg>
+        </div>
+        <div class="wa-chat">
+          <div class="wa-bubble"><h3>Ficou com alguma dúvida?</h3><span class="wa-time" aria-hidden="true">agora</span></div>
+          <div class="wa-bubble"><p>Fale com o nosso suporte pelo WhatsApp.</p><span class="wa-time" aria-hidden="true">agora</span></div>
+          <div class="wa-typing" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>
+        <a class="cta cta--sm cta--wa" href="#suporte" data-link="suporte"><svg aria-hidden="true"><use href="#wa"/></svg>FALAR COM O SUPORTE</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. FECHAMENTO ================= -->
+<section class="sec closing">
+  <div class="bg" aria-hidden="true">
+    <div class="bg__base"></div><div class="bg__grid"></div>
+    <div class="bg__lines"><i></i><i></i></div>
+  </div>
+  <div class="container">
+    <h2 class="reveal"><span>Uma decisão.</span><span>Um único investimento.</span><span>Uma carreira de sucesso.</span></h2>
+    <div class="center"><a class="cta" href="#oferta"><span>Quero meu acesso vitalício</span></a></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">Nutri News · CNPJ [inserir] Contato [inserir]</div>
+</footer>
+
+<script>
+  /* ===== CONFIGURAÇÃO ===== */
+  const CONFIG = {
+    // Link do checkout (botão "Garantir meu acesso vitalício")
+    checkout: '',
+    // Link do WhatsApp do suporte (botão "Falar com o suporte")
+    suporte: ''
+  };
+  document.querySelectorAll('[data-link]').forEach(a => {
+    const url = CONFIG[a.dataset.link];
+    if (url) a.href = url;
+  });
+
+  /* ===== ENTRADA AO ROLAR ===== */
+  (function(){
+    const motionOk = !window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (!motionOk) return;
+    document.documentElement.classList.add('js');
+    let pending = [...document.querySelectorAll('.reveal')];
+    // Por posição (e não por observer): o conteúdo nunca fica invisível
+    function check(){
+      pending = pending.filter(el => {
+        if (el.getBoundingClientRect().top > innerHeight - 40) return true;
+        el.classList.add('in');
+        // libera o hover dos cards depois da entrada
+        setTimeout(() => el.classList.remove('reveal','in'), 1200);
+        return false;
+      });
+      if (!pending.length){ removeEventListener('scroll', check); clearInterval(timer); }
+    }
+    addEventListener('scroll', check, {passive:true});
+    const timer = setInterval(check, 500);
+    check();
+  })();
+
+  /* ===== HOVER NO MOBILE PELA ROLAGEM =====
+     Em telas de toque, o card mais próximo do centro da tela recebe .is-active,
+     que usa o mesmo visual do :hover. Para um card novo entrar, basta incluir o seletor aqui
+     e escrever o CSS como ".card:hover,.card.is-active{...}". */
+  (function(){
+    if (!window.matchMedia('(hover:none)').matches) return;
+    const cards = [...document.querySelectorAll('.pillar,.wcard,.course,.bonus-card,.testi-card,.fit-card,.faq details,.support')];
+    let current = null, ticking = false;
+    function update(){
+      ticking = false;
+      const mid = innerHeight / 2, band = innerHeight * .22;
+      let best = null, bestDist = Infinity;
+      for (const el of cards){
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) continue;
+        const dist = Math.abs((r.top + r.bottom) / 2 - mid);
+        if (dist < bestDist){ best = el; bestDist = dist; }
+      }
+      if (best && bestDist > band && !(best.getBoundingClientRect().top < mid && best.getBoundingClientRect().bottom > mid)) best = null;
+      if (best){
+        // luz interna acompanha a rolagem: desce pelo card conforme ele passa pelo centro
+        const r = best.getBoundingClientRect();
+        best.style.setProperty('--mx', '50%');
+        best.style.setProperty('--my', Math.max(0, Math.min(100, (mid - r.top) / r.height * 100)) + '%');
+      }
+      if (best === current) return;
+      if (current) current.classList.remove('is-active');
+      if (best) best.classList.add('is-active');
+      current = best;
+    }
+    const onScroll = () => { if (!ticking){ ticking = true; requestAnimationFrame(update); } };
+    addEventListener('scroll', onScroll, {passive:true});
+    addEventListener('resize', onScroll);
+    setInterval(update, 400);
+    update();
+  })();
+
+  /* ===== FUROS DO TICKET (oferta + garantia): alinha à divisória pontilhada ===== */
+  (() => {
+    const deal = document.getElementById('deal'); if (!deal) return;
+    const g = deal.querySelector('.deal__guar');
+    const set = () => {
+      deal.style.setProperty('--cx', (g.offsetLeft + 1) + 'px');
+      deal.style.setProperty('--cy', (g.offsetTop + 1) + 'px');
+    };
+    set(); addEventListener('resize', set); addEventListener('load', set);
+    if (document.fonts) document.fonts.ready.then(set);
+  })();
+
+  /* ===== LINHA DOS CARDS PARA QUEM =====
+     mede do centro do 1º ícone ao centro do último e define, para cada item,
+     o atraso em que ele acende (linha descendo) e apaga (linha subindo) */
+  (() => {
+    const IN = 1, OUT = .45;
+    const measure = () => document.querySelectorAll('.fit-card ul').forEach(ul => {
+      const icons = [...ul.querySelectorAll('li svg')];
+      if (icons.length < 2) return;
+      const top = ul.getBoundingClientRect().top;
+      const c = icons.map(s => { const r = s.getBoundingClientRect(); return r.top - top + r.height / 2; });
+      const len = c[c.length - 1] - c[0];
+      ul.style.setProperty('--fit-line', len + 'px');
+      icons.forEach((s, i) => {
+        const f = len ? (c[i] - c[0]) / len : 0;
+        s.parentElement.style.setProperty('--din', (f * IN).toFixed(2) + 's');
+        s.parentElement.style.setProperty('--dout', ((1 - f) * OUT).toFixed(2) + 's');
+      });
+    });
+    measure();
+    addEventListener('resize', measure);
+    addEventListener('load', measure);
+    if (document.fonts) document.fonts.ready.then(measure);
+  })();
+
+  /* ===== LUZ QUE SEGUE O MOUSE (pilares, cursos e bônus, desktop) ===== */
+  if (window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.pillar,.course,.bonus-card,.faq details').forEach(card => {
+      let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+      const step = () => {
+        // suaviza o movimento da luz
+        x += (tx - x) * .18; y += (ty - y) * .18;
+        card.style.setProperty('--mx', x + 'px');
+        card.style.setProperty('--my', y + 'px');
+        raf = (Math.abs(tx - x) + Math.abs(ty - y) > .5) ? requestAnimationFrame(step) : 0;
+      };
+      card.addEventListener('pointerenter', e => {
+        const r = card.getBoundingClientRect();
+        x = tx = e.clientX - r.left; y = ty = e.clientY - r.top;
+        card.style.setProperty('--mx', x + 'px'); card.style.setProperty('--my', y + 'px');
+      });
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        tx = e.clientX - r.left; ty = e.clientY - r.top;
+        if (!raf) raf = requestAnimationFrame(step);
+      });
+    });
+  }
+
+  /* ===== UM ITEM ABERTO POR VEZ ===== */
+  ['courses','faq'].forEach(id => {
+    const items = document.querySelectorAll('#'+id+' details');
+    items.forEach(d => d.addEventListener('toggle', () => {
+      if (d.open) items.forEach(o => { if (o !== d) o.open = false; });
+    }));
+  });
+
+  /* ===== PROFUNDIDADE SUTIL (desktop) ===== */
+  if (window.matchMedia('(pointer:fine) and (min-width:861px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    const layers = document.querySelectorAll('.hero [data-depth]');
+    let raf;
+    window.addEventListener('mousemove', (e) => {
+      if (window.scrollY > innerHeight) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const x = (e.clientX / innerWidth - .5), y = (e.clientY / innerHeight - .5);
+        layers.forEach(l => {
+          const d = +l.dataset.depth;
+          const base = l.classList.contains('expert__ring') ? 'translate(-50%,-50%) ' : '';
+          l.style.transform = base + `translate(${-x*d}px, ${-y*d}px)`;
+        });
+      });
+    });
+  }
+</script>
+</body>
+</html>
